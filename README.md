@@ -1,2 +1,0 @@
-# JavaStart
-# JavaStart
