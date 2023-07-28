@@ -1,4 +1,4 @@
-package com.xtb.recruit;
+package com.codewars.loopoverTests;
 
 import static org.junit.Assert.assertTrue;
 

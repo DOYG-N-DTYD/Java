@@ -1,6 +1,5 @@
 package com.codewars.loopover;
 
-import java.awt.RenderingHints.Key;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -59,49 +58,43 @@ public class GameField {
 	}
 
 	public void actionL(int actionForRowNumber) { // actionForRowNumber = yCONSTANT
-		int sizeOfRow = gameField.length;
-		Character buffCharacterValue = getKeyByValueFromHashGameField(0,actionForRowNumber);
+		Character buffCharacterValue = getKeyByValueFromHashGameField(0, actionForRowNumber);
 		char oldValue;
-		for (int x = 1; x < sizeOfRow; x++) {
-			oldValue = getKeyByValueFromHashGameField(x,actionForRowNumber);
-			putKeyByValueInHashGameField(x-1, actionForRowNumber,oldValue);
+		for (int x = 1; x < gameField.length; x++) {
+			oldValue = getKeyByValueFromHashGameField(x, actionForRowNumber);
+			putKeyByValueInHashGameField(x - 1, actionForRowNumber, oldValue);
 		}
-		putKeyByValueInHashGameField(sizeOfRow-1, actionForRowNumber, buffCharacterValue);
+		putKeyByValueInHashGameField(gameField.length - 1, actionForRowNumber, buffCharacterValue);
 	}
 
 	public void actionR(int actionForRowNumber) {
-		int sizeOfRow = gameField.length;
-		Character buffCharacterValue = getKeyByValueFromHashGameField(sizeOfRow-1,actionForRowNumber);
+		Character buffCharacterValue = getKeyByValueFromHashGameField(gameField.length - 1, actionForRowNumber);
 		char oldValue;
-		for (int x = sizeOfRow-1; x > 0; x--) {
-			oldValue = getKeyByValueFromHashGameField(x-1,actionForRowNumber);
-			System.out.println(x +"  " +oldValue);
-			putKeyByValueInHashGameField(x, actionForRowNumber,oldValue);
+		for (int x = gameField.length - 1; x > 0; x--) {
+			oldValue = getKeyByValueFromHashGameField(x - 1, actionForRowNumber);
+			putKeyByValueInHashGameField(x, actionForRowNumber, oldValue);
 		}
 		putKeyByValueInHashGameField(0, actionForRowNumber, buffCharacterValue);
 	}
 
 	public void actionU(int actionForColumnNumber) {
-		int sizeOfColumn = gameField.length;
-		Character buffCharacterValue = getKeyByValueFromHashGameField(actionForColumnNumber,0);
+		Character buffCharacterValue = getKeyByValueFromHashGameField(actionForColumnNumber, 0);
 		char oldValue;
-		for (int y = 1; y < sizeOfColumn; y++) {
-			oldValue = getKeyByValueFromHashGameField(actionForColumnNumber,y);
-			putKeyByValueInHashGameField(actionForColumnNumber,y-1 ,oldValue);
+		for (int y = 1; y < gameField.length; y++) {
+			oldValue = getKeyByValueFromHashGameField(actionForColumnNumber, y);
+			putKeyByValueInHashGameField(actionForColumnNumber, y - 1, oldValue);
 		}
-		putKeyByValueInHashGameField(actionForColumnNumber,sizeOfColumn-1, buffCharacterValue);
+		putKeyByValueInHashGameField(actionForColumnNumber, gameField.length - 1, buffCharacterValue);
 	}
 
 	public void actionD(int actionForColumnNumber) {
-		int sizeOfColumn = gameField.length;
-		Character buffCharacterValue = getKeyByValueFromHashGameField(actionForColumnNumber,sizeOfColumn-1);
+		Character buffCharacterValue = getKeyByValueFromHashGameField(actionForColumnNumber, gameField.length - 1);
 		char oldValue;
-		for (int y = sizeOfColumn-1; y > 0; y--) {
-			oldValue = getKeyByValueFromHashGameField(actionForColumnNumber,y-1);
-			System.out.println(y +"  " +oldValue);
-			putKeyByValueInHashGameField(actionForColumnNumber,y,oldValue);
+		for (int y = gameField.length - 1; y > 0; y--) {
+			oldValue = getKeyByValueFromHashGameField(actionForColumnNumber, y - 1);
+			putKeyByValueInHashGameField(actionForColumnNumber, y, oldValue);
 		}
-		putKeyByValueInHashGameField(actionForColumnNumber,0, buffCharacterValue);
+		putKeyByValueInHashGameField(actionForColumnNumber, 0, buffCharacterValue);
 	}
 
 	public void showGameField() throws Exception {
@@ -122,7 +115,6 @@ public class GameField {
 			for (int j = 0; j < this.gameField[i].length; j++) {
 				// System.out.println(this.gameField[i][j] +" "+ "i:"+i+ "j:"+j);
 				for (int idxLetter = 0; idxLetter < this.gameField[i][j].length(); idxLetter++) {
-					System.out.println(this.gameField[i][j].charAt(idxLetter) + " XY: " + idxLetter + i);
 					tempHashMap.put(Integer.toString(idxLetter).concat(Integer.toString(i)),
 							this.gameField[i][j].charAt(idxLetter)); // String: xy Char: letter
 					// При инициализации Null pointer ex. нужно создавать Temp
@@ -132,19 +124,22 @@ public class GameField {
 		XYLetterHashMap = tempHashMap;
 	}
 
+	public void shuffleGameField() {
+
+	}
+
 	public void showHashMap() {
 		// :D SORT BY KEY FUNNY MOVE
 		for (Map.Entry<String, Character> entry : XYLetterHashMap.entrySet()) {
 			String key = entry.getKey();
 			Character val = entry.getValue();
-			System.out.println("KEY: " + key + " VALUE: " + val);
 		}
 	}
 
-	public void showHashMapByXYvalues() { // TODO Board size
+	public void showHashMapByXYvalues() { // TODO in future change for triangle
 		String keyString;
-		for (int y = 0; y < 3; y++) {
-			for (int x = 0; x < 3; x++) {
+		for (int y = 0; y < this.gameField.length; y++) {
+			for (int x = 0; x < this.gameField.length; x++) {
 				keyString = Integer.toString(x).concat(Integer.toString(y));
 				System.out.print(XYLetterHashMap.get(keyString));
 			}
@@ -152,11 +147,11 @@ public class GameField {
 		}
 		System.out.println();
 	}
-	
+
 	public char getKeyByValueFromHashGameField(int x, int y) {
-		System.out.println(x + " "+ y);
 		return XYLetterHashMap.get(Integer.toString(x).concat(Integer.toString(y)));
 	}
+
 	public void putKeyByValueInHashGameField(int x, int y, char value) {
 		XYLetterHashMap.put(Integer.toString(x).concat(Integer.toString(y)), value);
 	}
