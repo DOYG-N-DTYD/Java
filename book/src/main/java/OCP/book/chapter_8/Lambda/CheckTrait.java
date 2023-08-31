@@ -1,4 +1,4 @@
-package OCP.book.chapterLambdas8;
+package OCP.book.chapter_8.Lambda;
 
 @FunctionalInterface
 public interface CheckTrait {

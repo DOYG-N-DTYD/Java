@@ -3,15 +3,20 @@ package OCP.book;
 import java.util.ArrayList;
 import java.util.List;
 
-import OCP.book.chapterLambdas8.Animal;
-import OCP.book.chapterLambdas8.CheckIfHooper;
-import OCP.book.chapterLambdas8.CheckTrait;
-import OCP.book.chapterLambdas8.TraditionalSearch;
+import OCP.book.chapter_8.Lambda.Animal;
+import OCP.book.chapter_8.Lambda.CheckIfHooper;
+import OCP.book.chapter_8.Lambda.CheckTrait;
+import OCP.book.chapter_8.Lambda.TraditionalSearch;
+import OCP.book.chapter_8.Lambda.MethodReferences.Duckling;
 
 public class App 
 {
     public static void main( String[] args )
     {
-    	TraditionalSearch.search();
+    	//TraditionalSearch.search();
+    	
+    	Duckling duckling = new Duckling();
+    	duckling.makeSound("Kr kr");
+    	
     }
 }

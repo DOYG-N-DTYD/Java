@@ -1,4 +1,4 @@
-package OCP.book.chapterLambdas8;
+package OCP.book.chapter_8.Lambda;
 
 import java.security.PublicKey;
 import java.util.*;
