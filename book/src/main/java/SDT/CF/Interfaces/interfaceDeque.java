@@ -1,4 +1,4 @@
-package SDT.CF;
+package SDT.CF.Interfaces;
 
 public class interfaceDeque {
 

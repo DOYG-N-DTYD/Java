@@ -1,4 +1,4 @@
-package SDT.CF;
+package SDT.CF.Interfaces;
 
 import java.util.Collection;
 
