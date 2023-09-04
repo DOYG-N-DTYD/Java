@@ -14,18 +14,20 @@ public class App
 {
     public static void main( String[] args )
     {
-    	//TraditionalSearch.search();
     	
-//    	Duckling duckling = new Duckling();
-//    	duckling.makeSound("Kr kr");
-    	
-    	ArrayList<String> humansNameStrings = new ArrayList<>();
-    	humansNameStrings.add("Jack");
-    	humansNameStrings.add("Bob");
-    	humansNameStrings.add("Jimmy");
-    	humansNameStrings.removeIf(n -> n.startsWith("J"));
-    	for (String name : humansNameStrings) {
-			System.out.println(name);
-		}
     }
 }
+
+//TraditionalSearch.search();
+
+//Duckling duckling = new Duckling();
+//duckling.makeSound("Kr kr");
+
+//ArrayList<String> humansNameStrings = new ArrayList<>();
+//humansNameStrings.add("Jack");
+//humansNameStrings.add("Bob");
+//humansNameStrings.add("Jimmy");
+//humansNameStrings.removeIf(n -> n.startsWith("J"));
+//for (String name : humansNameStrings) {
+//	System.out.println(name);
+//}
