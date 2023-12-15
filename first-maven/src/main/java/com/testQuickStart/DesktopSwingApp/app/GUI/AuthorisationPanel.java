@@ -41,38 +41,41 @@ public class AuthorisationPanel {
 		return authorisationPanel;
 	}
 	private void initAuthorisationPanel(){
-		authorisationPanel.setBorder(new TitledBorder("MainFrameLayout"));;
+		createChat();
+        createLoginFrame();
+	    }
+    private void createLoginFrame(){
+        //create login pass area
+        JPanel inputAndConnectPanel = new JPanel();
+        inputAndConnectPanel.setLayout(new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS));
+        
+        inputAndConnectPanel.setSize(400,400); //TODO
+
+        inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
+        // as single component added w/no constraint, will be centered
+        inputAndConnectPanel.add(new JLabel("Username:"));
+        inputAndConnectPanel.add(usernameField);
+        inputAndConnectPanel.add(new JLabel("Password:"));
+        inputAndConnectPanel.add(passwordField);
+        inputAndConnectPanel.add(connectButton);
+        authorisationPanel.add(inputAndConnectPanel);
+        
+    }
+
+    private void createChat(){
+        //Create chat in mainFrame with send button
+        authorisationPanel.setBorder(new TitledBorder("Authorisation Panel"));;
 		BorderLayout bordeLayout = new BorderLayout();
         JPanel elementsBorderLayout = new JPanel(bordeLayout);
         elementsBorderLayout.setBorder(new TitledBorder("Chat"));
         
-        JTextArea textArea = new JTextArea(10,25);	//TODO
+        JTextArea textArea = new JTextArea(10,25);
         elementsBorderLayout.add(textArea);
         
         JButton sendButton = new JButton("Send");
         elementsBorderLayout.add(sendButton,BorderLayout.SOUTH);
         authorisationPanel.add(elementsBorderLayout, BorderLayout.SOUTH);
-        
-        
-    //     JPanel lineStart = new JPanel();
-    //     lineStart.setLayout(new GridBagLayout());
-    //     lineStart.setBorder(new TitledBorder("GridBagLayout"));
-    //     // will appear on the left, in a LTR text orientation locale
-    //     authorisationPanel.add(lineStart, BorderLayout.LINE_START);
-        
-        
-    //     JPanel inputAndConnectPanel = new JPanel();
-    //     inputAndConnectPanel.setLayout(new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS));
-    //     inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
-    //     // as single component added w/no constraint, will be centered
-    //     inputAndConnectPanel.add(new JLabel("Username:"));
-    //     inputAndConnectPanel.add(usernameField);
-    //     inputAndConnectPanel.add(new JLabel("Password:"));
-    //     inputAndConnectPanel.add(passwordField);
-    //     inputAndConnectPanel.add(connectButton);
-    //     lineStart.add(inputAndConnectPanel); 
-	    }
-
+    }
 	private void createButtons(){
 		Integer inputFieldsSize = 10;
 		String connectButtonName = "Connect";
