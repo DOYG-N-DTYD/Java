@@ -42,33 +42,36 @@ public class AuthorisationPanel {
 	}
 	private void initAuthorisationPanel(){
 		authorisationPanel.setBorder(new TitledBorder("MainFrameLayout"));;
-		CardLayout cardLayout = new CardLayout(150,1);
-        JPanel cards = new JPanel(cardLayout);
-        cards.setBorder(new TitledBorder("CardLayout"));
+		BorderLayout bordeLayout = new BorderLayout();
+        JPanel elementsBorderLayout = new JPanel(bordeLayout);
+        elementsBorderLayout.setBorder(new TitledBorder("Chat"));
         
-        JTextArea textArea = new JTextArea(50,50);	//TODO
-        cards.add(textArea);
+        JTextArea textArea = new JTextArea(10,25);	//TODO
+        elementsBorderLayout.add(textArea);
         
-        authorisationPanel.add(cards);
-        
-        JPanel lineStart = new JPanel();
-        lineStart.setLayout(new GridBagLayout());
-        lineStart.setBorder(new TitledBorder("GridBagLayout"));
-        // will appear on the left, in a LTR text orientation locale
-        authorisationPanel.add(lineStart, BorderLayout.LINE_START);
+        JButton sendButton = new JButton("Send");
+        elementsBorderLayout.add(sendButton,BorderLayout.SOUTH);
+        authorisationPanel.add(elementsBorderLayout, BorderLayout.SOUTH);
         
         
-        JPanel inputAndConnectPanel = new JPanel();
-        inputAndConnectPanel.setLayout(new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS));
-        inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
-        // as single component added w/no constraint, will be centered
-        inputAndConnectPanel.add(new JLabel("Username:"));
-        inputAndConnectPanel.add(usernameField);
-        inputAndConnectPanel.add(new JLabel("Password:"));
-        inputAndConnectPanel.add(passwordField);
-        inputAndConnectPanel.add(connectButton);
-        lineStart.add(inputAndConnectPanel); 
-	}
+    //     JPanel lineStart = new JPanel();
+    //     lineStart.setLayout(new GridBagLayout());
+    //     lineStart.setBorder(new TitledBorder("GridBagLayout"));
+    //     // will appear on the left, in a LTR text orientation locale
+    //     authorisationPanel.add(lineStart, BorderLayout.LINE_START);
+        
+        
+    //     JPanel inputAndConnectPanel = new JPanel();
+    //     inputAndConnectPanel.setLayout(new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS));
+    //     inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
+    //     // as single component added w/no constraint, will be centered
+    //     inputAndConnectPanel.add(new JLabel("Username:"));
+    //     inputAndConnectPanel.add(usernameField);
+    //     inputAndConnectPanel.add(new JLabel("Password:"));
+    //     inputAndConnectPanel.add(passwordField);
+    //     inputAndConnectPanel.add(connectButton);
+    //     lineStart.add(inputAndConnectPanel); 
+	    }
 
 	private void createButtons(){
 		Integer inputFieldsSize = 10;
@@ -90,15 +93,6 @@ public class AuthorisationPanel {
                // Implement your database connection logic here
                // You can use username and password to establish a connection
                // to your database (e.g., MySQL, PostgreSQL, etc.).
-           }
-       });
-
-       fetchDataButton.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               // Implement your data retrieval logic here
-               // You can use the established database connection to fetch data
-               // and display it in the table.
            }
        });
 	}
