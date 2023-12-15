@@ -29,14 +29,6 @@ public class SwingDesktopApplication {
         MainFrame applicationFrame = new MainFrame(); 
         applicationFrame.loadCanvas(new Canvas());
         applicationFrame.mainFrame.add((new AuthorisationPanel()).getAuthorisationPanel(),BorderLayout.WEST);
-        
-
-        // Create a table for displaying database data
-//        DefaultTableModel tableModel = new DefaultTableModel();
-//        JTable table = new JTable(tableModel);
-//        JScrollPane tableScrollPane = new JScrollPane(table);
-//        tableScrollPane.setPreferredSize(new Dimension(100, 100));
-//        applicationFrame.add(tableScrollPane, BorderLayout.SOUTH);
     }
 
 }

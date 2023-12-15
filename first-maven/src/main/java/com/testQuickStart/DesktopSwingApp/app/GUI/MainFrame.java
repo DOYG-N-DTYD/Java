@@ -3,6 +3,7 @@ package com.testQuickStart.DesktopSwingApp.app.GUI;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class MainFrame{
 	public JFrame mainFrame;
