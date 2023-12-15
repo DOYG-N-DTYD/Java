@@ -1,5 +1,3 @@
-package com.xtb.recruit;
-
 import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Iterator;
