@@ -12,7 +12,7 @@ public class MainFrame{
 		JFrame frame = new JFrame("Canvas with Database Connection");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setSize(512, 384);
+        frame.setSize(800, 600);
         frame.setVisible(true);
         this.mainFrame = frame;
         

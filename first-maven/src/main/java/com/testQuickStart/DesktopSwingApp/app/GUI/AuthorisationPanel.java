@@ -39,64 +39,41 @@ public class AuthorisationPanel {
 	private Stack<String> chatStack;
 
 	public AuthorisationPanel() {
-		// Create a panel for database connection controls on the left side
-		authorisationPanel = new JPanel(new BorderLayout(15, 0));
-		// authorisationPanel.setLayout(new BoxLayout(authorisationPanel,
-		// BoxLayout.Y_AXIS));
-		// authorisationPanel.setLayout(new GroupLayout(authorisationPanel));
-		// dbPanel.setPreferredSize(new Dimension(25, 10));
+		authorisationPanel = new JPanel(new BorderLayout(30, 30));
+
 		createButtons();
 		addEventsToButtons();
 		initAuthorisationPanel();
-
 	}
-
+	
 	public JPanel getAuthorisationPanel() {
 		return authorisationPanel;
 	}
 
 	private void initAuthorisationPanel() {
-		createChat();
 		createLoginFrame();
+		createChat();
+		//createChatControls(); 
+		//TODO: problem with chat controls 
 	}
 
 	private void createLoginFrame() {
-		// create login pass area
 		JPanel inputAndConnectPanel = new JPanel();
 		inputAndConnectPanel.setLayout(new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS));
-
-		inputAndConnectPanel.setSize(400, 400); // TODO
-
 		inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
-		// as single component added w/no constraint, will be centered
 		inputAndConnectPanel.add(new JLabel("Username:"));
 		inputAndConnectPanel.add(usernameField);
 		inputAndConnectPanel.add(new JLabel("Password:"));
 		inputAndConnectPanel.add(passwordField);
 		inputAndConnectPanel.add(connectButton);
 
-		messageTextField = new JTextField(1);
-		inputAndConnectPanel.add(messageTextField);
-		// TODO add sending after send click
-		addEventClickSend();
-
 		authorisationPanel.add(inputAndConnectPanel);
 
 	}
 
-	// panel.setLayout(new FlowLayout());
-	// JTextArea tArea = new JTextArea(10,10);
-	// JScrollPane scrollPane = new JScrollPane(tArea);
-	// panel.add(scrollPane);
-	// frame.setContentPane(panel);
-	// frame.setSize(500, 500);
-	// frame.setLocationByPlatform(true);
-	// frame.setVisible(true);
-
 	private void createChat() {
-		// Create chat in mainFrame with send button
+
 		authorisationPanel.setBorder(new TitledBorder("Authorisation Panel"));
-		;
 		BorderLayout bordeLayout = new BorderLayout();
 		JPanel elementsBorderLayout = new JPanel(new FlowLayout());// bordeLayout);
 		elementsBorderLayout.setBorder(new TitledBorder("Chat"));
@@ -106,19 +83,27 @@ public class AuthorisationPanel {
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		chatTextArea.setEditable(true);
-
-		// userMessageTextArea = new JTextArea(1,25);
-		// elementsBorderLayout.add(chatTextArea);
 		elementsBorderLayout.add(scroll);
-		// elementsBorderLayout.add(userMessageTextArea);
 
 		sendButton = new JButton("Send");
-		elementsBorderLayout.add(sendButton, BorderLayout.SOUTH);
+		//elementsBorderLayout.add(sendButton, BorderLayout.SOUTH);
 		authorisationPanel.add(elementsBorderLayout, BorderLayout.SOUTH);
 
-		chatStack = new Stack<String>(); // TODO:
+		messageTextField = new JTextField(1);
+		//elementsBorderLayout.add(messageTextField);
+		
+		chatStack = new Stack<String>();
+		addEventClickSend();
 	}
 
+	private void createChatControls() {
+		JPanel chatControlsPanel = new JPanel();
+		chatControlsPanel.setLayout(new BoxLayout(chatControlsPanel ,BoxLayout.Y_AXIS));
+		chatControlsPanel.add(messageTextField);
+		chatControlsPanel.add(sendButton);
+		authorisationPanel.add(chatControlsPanel);
+	}
+	
 	private void createButtons() {
 		Integer inputFieldsSize = 10;
 		String connectButtonName = "Connect";
@@ -183,5 +168,6 @@ public class AuthorisationPanel {
 			formattedMessageToString.append(chatMsg.toString());
 		}
 		chatTextArea.setText(formattedMessageToString.toString());
+		messageTextField.setText("");
 	}
 }
