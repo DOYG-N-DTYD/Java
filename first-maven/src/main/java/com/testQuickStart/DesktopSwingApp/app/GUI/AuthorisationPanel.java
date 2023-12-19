@@ -4,17 +4,21 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Stack;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import com.testQuickStart.DesktopSwingApp.Database.DBengine;
 
 public class AuthorisationPanel {
 	private JPanel authorisationPanel;
@@ -92,12 +96,19 @@ public class AuthorisationPanel {
 			public void actionPerformed(ActionEvent e) {
 				String username = usernameField.getText();
 				String password = passwordField.getText();
-				// Implement your database connection logic here
-				// You can use username and password to establish a connection
-				// to your database (e.g., MySQL, PostgreSQL, etc.).
-				System.out.println(username);
-				System.out.println(password);
+				JOptionPane.showMessageDialog(null, "This is even shorter");
+				try {
+					checkCredentials();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
+	}
+	private void checkCredentials() throws SQLException {
+		// TODO
+		DBengine dBengine = new DBengine();
+    	dBengine.allData();
 	}
 }

@@ -23,7 +23,7 @@ public class DBengine {
 	return dataSource;
 	}
 	
-	void allData() throws SQLException {
+	public void allData() throws SQLException {
 		System.out.println("All DATA METHOD");
 		// Use the method we defined earlier to create a datasource
 		DataSource dataSource = createDataSource();
