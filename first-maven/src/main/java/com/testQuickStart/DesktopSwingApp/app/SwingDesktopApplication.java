@@ -25,17 +25,12 @@ public class SwingDesktopApplication {
     }
 
     public static void createAndShowGUI() {
-        
-        //MainFrame applicationFrame = new MainFrame(); 
-        //applicationFrame.loadCanvas(new Canvas());
-        //applicationFrame.mainFrame.add((new AuthorisationPanel()).getAuthorisationPanel(),BorderLayout.WEST);
-        
-        //applicationFrame.loadChat(new Chat());
-        //applicationFrame.add();
     	
     	MainFrame mainFrame = new MainFrame();
-    	mainFrame.loadChat(new Chat());
+    	//mainFrame.loadChat(new Chat());
+    	mainFrame.loadAuthorisationPanel(new AuthorisationPanel());
     	//mainFrame.loadCanvas(new Canvas());
+    	
     }
 
 }

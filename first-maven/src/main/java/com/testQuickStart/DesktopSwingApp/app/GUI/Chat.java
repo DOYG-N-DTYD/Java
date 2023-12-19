@@ -23,6 +23,9 @@ public class Chat extends Component{
 	private JTextField messageTextField;
 	private Stack<String> chatStack;
  	
+	private Integer inputWidth = 600;
+	private Integer inputHeight = 22;
+	
 	public Chat() {
 		// TODO: constructor
 		createChatGUI();
@@ -35,14 +38,8 @@ public class Chat extends Component{
 	private void createChatGUI() {
 		createChatPanel();
         createTextArea();
-
-		sendButton = new JButton("Send");
-		messageTextField = new JTextField(1);
-		chatStack = new Stack<String>();
-
-		addEventClickSend();
         createChatControls();
-        //parentFrame.add(chatPanel); //TODO: add chat to parent component
+		addEventClickSend(); 
 	}
 
 	private void createChatPanel() {
@@ -60,10 +57,11 @@ public class Chat extends Component{
 	}
 	
 	private void createChatControls() {
-		Integer inputWidth = 600;
-        Integer inputHeight = 22;
-
         JPanel chatControlsPanel = new JPanel();
+        
+        sendButton = new JButton("Send");
+        messageTextField = new JTextField(1);
+        
         //chatControlsPanel.setBorder(new TitledBorder("Chat controls"));
         chatControlsPanel.setMinimumSize(new Dimension(inputWidth,inputHeight));
 		chatControlsPanel.setLayout(new BoxLayout(chatControlsPanel ,BoxLayout.Y_AXIS));
@@ -79,7 +77,7 @@ public class Chat extends Component{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (messageTextField.getText().length() == 0) {
-					System.out.println("Empty msg");
+					System.out.println("Empty msg"); //TODO: empy message alert to user && in user information panel
 				} else {
 					addMessageToStack();
 					displayMessagesFromStackInChat();
@@ -89,6 +87,7 @@ public class Chat extends Component{
 	}
 
 	private void addMessageToStack() {
+		chatStack = new Stack<String>();
 		chatStack.add(messageTextField.getText());
 	}
 

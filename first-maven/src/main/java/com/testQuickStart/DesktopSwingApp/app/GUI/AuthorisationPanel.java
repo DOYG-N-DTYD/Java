@@ -22,9 +22,20 @@ public class AuthorisationPanel {
 	private JTextField passwordField;
 	private JButton connectButton;
 
+	private Integer panelWidth = 300;
+	private Integer panelHeight = 120;
+	
+	private Integer inputWidth = 300;
+	private Integer inputHeight = 22;
+	private String connectButtonName = "Connect";
+	
+	private String usernameLabelString = "Username:";
+	private String passwordLabelString = "Password:";
+	
 	public AuthorisationPanel() {
 		authorisationPanel = new JPanel();
         authorisationPanel.setLayout(new BoxLayout(authorisationPanel,BoxLayout.Y_AXIS));
+        authorisationPanel.setMinimumSize(new Dimension(panelWidth,panelHeight));
 		createButtons();
 		addEventsToButtons();
 		initAuthorisationPanel();
@@ -36,27 +47,29 @@ public class AuthorisationPanel {
 
 	private void initAuthorisationPanel() {
 		createLoginFrame();
-		//createChat();
 	}
 
 	private void createLoginFrame() {
-		Integer panelWidth = 500;
-        Integer panelHeight = 100 ;
-        
         JPanel inputAndConnectPanel = new JPanel();
-        //inputAndConnectPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		BoxLayout inputBoxLayout = new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS);
         inputAndConnectPanel.setLayout(inputBoxLayout);
 		inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
         inputAndConnectPanel.setMaximumSize(new Dimension(panelWidth,panelHeight));
         inputAndConnectPanel.setMinimumSize(new Dimension(panelWidth,panelHeight));
         
-        JLabel usernameLabel = new JLabel("Username:");
+        JLabel usernameLabel = new JLabel(usernameLabelString);
         usernameLabel.setMinimumSize(new Dimension(panelWidth,panelHeight));
+        usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
         inputAndConnectPanel.add(usernameLabel);
-		inputAndConnectPanel.add(usernameField);
-        inputAndConnectPanel.add(new JLabel("Password:"));
-		inputAndConnectPanel.add(passwordField);
+		
+        usernameField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        inputAndConnectPanel.add(usernameField);
+        
+        inputAndConnectPanel.add(new JLabel(passwordLabelString));
+        passwordField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        inputAndConnectPanel.add(passwordField);
+        connectButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 		inputAndConnectPanel.add(connectButton);
 
 		authorisationPanel.add(inputAndConnectPanel);
@@ -64,10 +77,6 @@ public class AuthorisationPanel {
 	}
 
 	private void createButtons() {
-		Integer inputWidth = 500;
-        Integer inputHeight = 22;
-		String connectButtonName = "Connect";
-
 		usernameField = new JTextField();
         usernameField.setMaximumSize(new Dimension(inputWidth, inputHeight));
         usernameField.setMinimumSize(new Dimension(inputWidth, inputHeight));
