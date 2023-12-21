@@ -10,15 +10,20 @@ import org.postgresql.ds.PGSimpleDataSource;
 
 public class DBengine {
 	
-	private static DataSource createDataSource() {
+	private String dbUrlForConnection;
+
+	private void createUrlForConnection(String dbType,String dbName,String user, String password){
+		dbUrlForConnection = "jdbc:"+dbType+"://localhost:5432/"+dbName+"?user="+user+"&password="+password;
+	}
+
+	private DataSource createDataSource() {
 		// The url specifies the address of our database along with username and password credentials
 		// you should replace these with your own username and password
-		final String url =
-				"jdbc:postgresql://localhost:5432/postgres?user=postgres&password=11051996";
+		//final String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=11051996";
 		//System.out.println("URL setted");
 		final PGSimpleDataSource dataSource = new PGSimpleDataSource();
 		//System.out.println("NEW DATA_SOURCE created");
-		dataSource.setUrl(url);
+		dataSource.setUrl(dbUrlForConnection);
 		//System.out.println("DATA SOURCE URL SETTED");
 	return dataSource;
 	}

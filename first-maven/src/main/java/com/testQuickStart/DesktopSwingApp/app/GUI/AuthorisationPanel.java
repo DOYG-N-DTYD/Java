@@ -30,8 +30,8 @@ public class AuthorisationPanel {
 	private JTextField passwordField;
 	private JButton connectButton;
 
-	private Integer panelWidth = 800;
-	private Integer panelHeight = 600;
+	private Integer panelWidth = 500;
+	private Integer panelHeight = 300;
 	
 	private Integer inputWidth = 300;
 	private Integer inputHeight = 22;
