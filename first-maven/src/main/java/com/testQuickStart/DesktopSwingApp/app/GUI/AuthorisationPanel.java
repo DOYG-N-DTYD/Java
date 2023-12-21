@@ -80,8 +80,6 @@ public class AuthorisationPanel {
         
 		connectButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 		inputAndConnectPanel.add(connectButton);
-		JButton testButton1 = new JButton("TEST1");
-		JButton testButton2 = new JButton("TEST2");
 
 		JPanel connectAndChangeDB = new JPanel(){
 			public Dimension getPreferredSize() {
@@ -93,7 +91,7 @@ public class AuthorisationPanel {
 		
 		connectAndChangeDB.add(connectButton);
 		String[] elementsOfComboBox = {"PostgreSQL", "Mysql"};
-		JComboBox databaseChoise = new JComboBox<>(elementsOfComboBox);
+		JComboBox databaseChoise = new JComboBox<String>(elementsOfComboBox);
 		connectAndChangeDB.add(databaseChoise);
 		inputAndConnectPanel.add(connectAndChangeDB);
 
