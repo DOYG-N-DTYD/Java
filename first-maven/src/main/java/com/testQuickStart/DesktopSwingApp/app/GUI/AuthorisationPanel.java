@@ -27,7 +27,7 @@ public class AuthorisationPanel {
 	private JButton connectButton;
 
 	private Integer panelWidth = 300;
-	private Integer panelHeight = 120;
+	private Integer panelHeight = 130;
 	
 	private Integer inputWidth = 300;
 	private Integer inputHeight = 22;
