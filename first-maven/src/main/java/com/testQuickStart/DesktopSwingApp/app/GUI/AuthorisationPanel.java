@@ -1,5 +1,8 @@
 package com.testQuickStart.DesktopSwingApp.app.GUI;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,6 +13,7 @@ import java.util.Stack;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,8 +30,8 @@ public class AuthorisationPanel {
 	private JTextField passwordField;
 	private JButton connectButton;
 
-	private Integer panelWidth = 300;
-	private Integer panelHeight = 130;
+	private Integer panelWidth = 800;
+	private Integer panelHeight = 600;
 	
 	private Integer inputWidth = 300;
 	private Integer inputHeight = 22;
@@ -73,11 +77,27 @@ public class AuthorisationPanel {
         inputAndConnectPanel.add(new JLabel(passwordLabelString));
         passwordField.setAlignmentX(Component.LEFT_ALIGNMENT);
         inputAndConnectPanel.add(passwordField);
-        connectButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+		connectButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 		inputAndConnectPanel.add(connectButton);
+		JButton testButton1 = new JButton("TEST1");
+		JButton testButton2 = new JButton("TEST2");
+
+		JPanel connectAndChangeDB = new JPanel(){
+			public Dimension getPreferredSize() {
+                Dimension size = super.getPreferredSize();
+                size.width += 100;//extraWindowWidth;
+                return size;
+            }
+		};
+		
+		connectAndChangeDB.add(connectButton);
+		String[] elementsOfComboBox = {"PostgreSQL", "Mysql"};
+		JComboBox databaseChoise = new JComboBox<>(elementsOfComboBox);
+		connectAndChangeDB.add(databaseChoise);
+		inputAndConnectPanel.add(connectAndChangeDB);
 
 		authorisationPanel.add(inputAndConnectPanel);
-
 	}
 
 	private void createButtons() {
