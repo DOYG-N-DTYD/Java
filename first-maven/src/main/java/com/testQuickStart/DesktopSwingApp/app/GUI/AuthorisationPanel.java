@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -32,23 +34,25 @@ public class AuthorisationPanel {
 
 	private Integer panelWidth = 500;
 	private Integer panelHeight = 300;
-	
+
 	private Integer inputWidth = 300;
 	private Integer inputHeight = 22;
 	private String connectButtonName = "Connect";
-	
+
 	private String usernameLabelString = "Username:";
 	private String passwordLabelString = "Password:";
-	
+
+	private JComboBox databaseChoise;
+
 	public AuthorisationPanel() {
 		authorisationPanel = new JPanel();
-        authorisationPanel.setLayout(new BoxLayout(authorisationPanel,BoxLayout.Y_AXIS));
-        authorisationPanel.setMinimumSize(new Dimension(panelWidth,panelHeight));
+		authorisationPanel.setLayout(new BoxLayout(authorisationPanel, BoxLayout.Y_AXIS));
+		authorisationPanel.setMinimumSize(new Dimension(panelWidth, panelHeight));
 		createButtons();
 		addEventsToButtons();
 		initAuthorisationPanel();
 	}
-	
+
 	public JPanel getAuthorisationPanel() {
 		return authorisationPanel;
 	}
@@ -58,40 +62,40 @@ public class AuthorisationPanel {
 	}
 
 	private void createLoginFrame() {
-        JPanel inputAndConnectPanel = new JPanel();
+		JPanel inputAndConnectPanel = new JPanel();
 		BoxLayout inputBoxLayout = new BoxLayout(inputAndConnectPanel, BoxLayout.Y_AXIS);
-        inputAndConnectPanel.setLayout(inputBoxLayout);
+		inputAndConnectPanel.setLayout(inputBoxLayout);
 		inputAndConnectPanel.setBorder(new TitledBorder("Database Connection"));
-        inputAndConnectPanel.setMaximumSize(new Dimension(panelWidth,panelHeight));
-        inputAndConnectPanel.setMinimumSize(new Dimension(panelWidth,panelHeight));
-        
-        JLabel usernameLabel = new JLabel(usernameLabelString);
-        usernameLabel.setMinimumSize(new Dimension(panelWidth,panelHeight));
-        usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        
-        inputAndConnectPanel.add(usernameLabel);
-		
-        usernameField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        inputAndConnectPanel.add(usernameField);
-        
-        inputAndConnectPanel.add(new JLabel(passwordLabelString));
-        passwordField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        inputAndConnectPanel.add(passwordField);
-        
+		inputAndConnectPanel.setMaximumSize(new Dimension(panelWidth, panelHeight));
+		inputAndConnectPanel.setMinimumSize(new Dimension(panelWidth, panelHeight));
+
+		JLabel usernameLabel = new JLabel(usernameLabelString);
+		usernameLabel.setMinimumSize(new Dimension(panelWidth, panelHeight));
+		usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		inputAndConnectPanel.add(usernameLabel);
+
+		usernameField.setAlignmentX(Component.LEFT_ALIGNMENT);
+		inputAndConnectPanel.add(usernameField);
+
+		inputAndConnectPanel.add(new JLabel(passwordLabelString));
+		passwordField.setAlignmentX(Component.LEFT_ALIGNMENT);
+		inputAndConnectPanel.add(passwordField);
+
 		connectButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 		inputAndConnectPanel.add(connectButton);
 
-		JPanel connectAndChangeDB = new JPanel(){
+		JPanel connectAndChangeDB = new JPanel() {
 			public Dimension getPreferredSize() {
-                Dimension size = super.getPreferredSize();
-                size.width += 100;//extraWindowWidth;
-                return size;
-            }
+				Dimension size = super.getPreferredSize();
+				size.width += 100;// extraWindowWidth;
+				return size;
+			}
 		};
-		
+
 		connectAndChangeDB.add(connectButton);
-		String[] elementsOfComboBox = {"PostgreSQL", "Mysql"};
-		JComboBox databaseChoise = new JComboBox<String>(elementsOfComboBox);
+		String[] elementsOfComboBox = { "postgresql", "mysql" };
+		databaseChoise = new JComboBox<String>(elementsOfComboBox);
 		connectAndChangeDB.add(databaseChoise);
 		inputAndConnectPanel.add(connectAndChangeDB);
 
@@ -100,11 +104,11 @@ public class AuthorisationPanel {
 
 	private void createButtons() {
 		usernameField = new JTextField();
-        usernameField.setMaximumSize(new Dimension(inputWidth, inputHeight));
-        usernameField.setMinimumSize(new Dimension(inputWidth, inputHeight));
+		usernameField.setMaximumSize(new Dimension(inputWidth, inputHeight));
+		usernameField.setMinimumSize(new Dimension(inputWidth, inputHeight));
 		passwordField = new JTextField();
-        passwordField.setMaximumSize(new Dimension(inputWidth, inputHeight));
-        passwordField.setMinimumSize(new Dimension(inputWidth, inputHeight));
+		passwordField.setMaximumSize(new Dimension(inputWidth, inputHeight));
+		passwordField.setMinimumSize(new Dimension(inputWidth, inputHeight));
 		connectButton = new JButton(connectButtonName);
 	}
 
@@ -112,26 +116,39 @@ public class AuthorisationPanel {
 		connectButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: 	regexp Email, Pass
-				// 			hash pass 
-				//			2 factor verification
-				//          forgot password
+				// TODO: regexp Email, Pass
+				// hash pass
+				// 2 factor verification
+				// forgot password
 				String username = usernameField.getText();
 				String password = passwordField.getText();
-				JOptionPane.showMessageDialog(null, "This is even shorter");
-				try {
-					checkCredentials(username, password);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				//JOptionPane.showMessageDialog(null, "This is even shorter");
+				checkCredentials(username, password);
 			}
 		});
 	}
-	private void checkCredentials(String emailString, String passwordString) throws SQLException {
+
+	private void checkCredentials(String userEmail, String password) {
+		String regex = "^(.+)@(.+)$";				// check email
+		Pattern patternForEmail = Pattern.compile(regex);
+		Matcher matchEmail = patternForEmail.matcher(userEmail);
+		//if (matchEmail.matches()) {
+			try {
+				connectDB(userEmail,password);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,e.toString());
+			}
+		// }else{
+		// 	JOptionPane.showMessageDialog(null, "Email must be example@example.example");
+		// }
+	}
+
+	private void connectDB(String emailString, String passwordString) throws SQLException {
 		// TODO
-		DBengine dBengine = new DBengine();
-    	
-		//dBengine.allData();
+		String dbType = databaseChoise.getSelectedItem().toString();
+		System.out.println(databaseChoise.getSelectedItem());
+		DBengine dBengine = new DBengine(dbType, emailString, passwordString);
+
+		// dBengine.allData();
 	}
 }

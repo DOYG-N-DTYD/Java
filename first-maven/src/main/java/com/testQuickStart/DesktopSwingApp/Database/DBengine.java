@@ -6,14 +6,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
+
 import org.postgresql.ds.PGSimpleDataSource;
 
 public class DBengine {
 	
 	private String dbUrlForConnection;
+	private PGSimpleDataSource dataSource;
 
-	private void createUrlForConnection(String dbType,String dbName,String user, String password){
-		dbUrlForConnection = "jdbc:"+dbType+"://localhost:5432/"+dbName+"?user="+user+"&password="+password;
+	public DBengine(String dbType,String user, String password){
+		createUrlForConnection(dbType,user,password);
+		checkConnectionToDB();
+	}
+	
+	private void createUrlForConnection(String dbType,String user, String password){
+		// dbType: mysql, postgresql
+		// dbName: database name
+		String host = "wn29.webd.pl";
+		String port = "2083";
+		String dbName = "mzdev_chat";
+		dbUrlForConnection = 	"jdbc:"+dbType+
+								"://"+host+
+								":"+port+
+								"/"+dbName+
+								"?user="+user+
+								"&password="+password;
 	}
 
 	private DataSource createDataSource() {
@@ -21,13 +39,23 @@ public class DBengine {
 		// you should replace these with your own username and password
 		//final String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=11051996";
 		//System.out.println("URL setted");
-		final PGSimpleDataSource dataSource = new PGSimpleDataSource();
+		dataSource = new PGSimpleDataSource();
 		//System.out.println("NEW DATA_SOURCE created");
 		dataSource.setUrl(dbUrlForConnection);
 		//System.out.println("DATA SOURCE URL SETTED");
-	return dataSource;
+		return dataSource;
 	}
 	
+	private void checkConnectionToDB(){
+		try {
+			dataSource.getConnection();
+			System.out.println("SUCCED CONNECTION");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error, connection lost");
+		}
+	}
+
 	public void allData() throws SQLException {
 		System.out.println("All DATA METHOD");
 		// Use the method we defined earlier to create a datasource
