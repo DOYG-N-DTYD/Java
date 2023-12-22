@@ -16,22 +16,29 @@ public class DBengine {
 	private PGSimpleDataSource dataSource;
 
 	public DBengine(String dbType,String user, String password){
+		System.out.println(1);
 		createUrlForConnection(dbType,user,password);
+		System.out.println(2);
+		createDataSource();
+		System.out.println(3);
 		checkConnectionToDB();
+		System.out.println(4);
 	}
 	
 	private void createUrlForConnection(String dbType,String user, String password){
 		// dbType: mysql, postgresql
 		// dbName: database name
-		String host = "wn29.webd.pl";
-		String port = "2083";
+		String host = "mn29.webd.pl";
+		String port = "3306";
 		String dbName = "mzdev_chat";
-		dbUrlForConnection = 	"jdbc:"+dbType+
-								"://"+host+
-								":"+port+
-								"/"+dbName+
-								"?user="+user+
-								"&password="+password;
+//		dbUrlForConnection = 	"jdbc:"+dbType+
+//								"://"+host+
+//								":"+port+
+//								"/"+dbName+
+//								"?user="+user+
+//								"&password="+password;
+		//dbUrlForConnection = "jdbc:postgesql://mn29.webd.pl:3306/mzdev_chat?user=mzdev_moderator&password=11051996";
+		dbUrlForConnection = "jdbc:mysql://mn29.webd.pl:3306/mzdev_chat,mzdev_moderator&password=11051996";
 	}
 
 	private DataSource createDataSource() {
@@ -40,9 +47,10 @@ public class DBengine {
 		//final String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=11051996";
 		//System.out.println("URL setted");
 		dataSource = new PGSimpleDataSource();
-		//System.out.println("NEW DATA_SOURCE created");
+		System.out.println("NEW DATA_SOURCE created");
 		dataSource.setUrl(dbUrlForConnection);
-		//System.out.println("DATA SOURCE URL SETTED");
+		System.out.println("Data source url : " + dbUrlForConnection);
+		System.out.println("DATA SOURCE URL SETTED");
 		return dataSource;
 	}
 	
