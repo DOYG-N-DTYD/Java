@@ -112,11 +112,15 @@ public class AuthorisationPanel {
 		connectButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO: 	regexp Email, Pass
+				// 			hash pass 
+				//			2 factor verification
+				//          forgot password
 				String username = usernameField.getText();
 				String password = passwordField.getText();
 				JOptionPane.showMessageDialog(null, "This is even shorter");
 				try {
-					checkCredentials();
+					checkCredentials(username, password);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -124,9 +128,10 @@ public class AuthorisationPanel {
 			}
 		});
 	}
-	private void checkCredentials() throws SQLException {
+	private void checkCredentials(String emailString, String passwordString) throws SQLException {
 		// TODO
 		DBengine dBengine = new DBengine();
-    	dBengine.allData();
+    	
+		//dBengine.allData();
 	}
 }
