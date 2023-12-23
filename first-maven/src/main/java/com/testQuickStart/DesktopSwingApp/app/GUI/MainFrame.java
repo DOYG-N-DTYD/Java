@@ -11,7 +11,7 @@ public class MainFrame extends JFrame{
 	private JFrame mainFrame;
 	
 	public MainFrame() {
-		Integer minimumWidth = 300;
+		Integer minimumWidth = 500;
 		Integer minimumHeight = 160;
 		
 		JFrame frame = new JFrame("Canvas with Database Connection");

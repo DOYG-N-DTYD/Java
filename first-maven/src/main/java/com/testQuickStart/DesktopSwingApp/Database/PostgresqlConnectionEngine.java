@@ -6,23 +6,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 
 import org.postgresql.ds.PGSimpleDataSource;
 
-public class DBengine {
+public class PostgresqlConnectionEngine extends JDBCconnectionEngine{
+	/*
+	 * private String driverTypeString = "jdbc"; private String databaseTypeString =
+	 * "mysql"; private String hostString = "mn29.webd.pl"; private String
+	 * portString = "3306"; private String databaseNameString = "mzdev_chat";
+	 * private String userNameString = "mzdev_moderator"; private String
+	 * userPasswordString = "stone11051996"; private String mysqlUrlForConnection =
+	 * "jdbc:mysql://mn29.webd.pl:3306/mzdev_chat?user=mzdev_moderator&password=11051996";
+	 */
+
+	public PostgresqlConnectionEngine(String usernameString, String passwordString) {
+		super(usernameString, passwordString);
+		// TODO Auto-generated constructor stub
+	}
+
+	private String driverTypeString;
+	private String databaseTypeString;
+	private String hostString;
+	private String portString;
+	private String databaseNameString;
+	private String userNameString;
+	private String userPasswordString;
+	//private String mysqlUrlForConnection = "jdbc:mysql://mn29.webd.pl:3306/mzdev_chat?user=mzdev_moderator&password=11051996";
 	
 	private String dbUrlForConnection;
 	private PGSimpleDataSource dataSource;
 
-	public DBengine(String dbType,String user, String password){
-		System.out.println(1);
+	public void ConnectionEngine(String dbType,String user, String password){
 		createUrlForConnection(dbType,user,password);
-		System.out.println(2);
 		createDataSource();
-		System.out.println(3);
 		checkConnectionToDB();
-		System.out.println(4);
 	}
 	
 	private void createUrlForConnection(String dbType,String user, String password){
@@ -42,15 +59,9 @@ public class DBengine {
 	}
 
 	private DataSource createDataSource() {
-		// The url specifies the address of our database along with username and password credentials
-		// you should replace these with your own username and password
 		//final String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=11051996";
-		//System.out.println("URL setted");
 		dataSource = new PGSimpleDataSource();
-		System.out.println("NEW DATA_SOURCE created");
 		dataSource.setUrl(dbUrlForConnection);
-		System.out.println("Data source url : " + dbUrlForConnection);
-		System.out.println("DATA SOURCE URL SETTED");
 		return dataSource;
 	}
 	
@@ -59,39 +70,22 @@ public class DBengine {
 			dataSource.getConnection();
 			System.out.println("SUCCED CONNECTION");
 		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("Error, connection lost");
+			System.out.println("Error, connection lost " + e);
 		}
 	}
 
 	public void allData() throws SQLException {
-		System.out.println("All DATA METHOD");
-		// Use the method we defined earlier to create a datasource
+		System.out.println("allData()");
+		
 		DataSource dataSource = createDataSource();
-
-		// get a connection from the datasource
 		Connection conn = dataSource.getConnection();
-
-		// Create a new statement on the connection
 		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users");
-
-		// Execute the query, and store the results in the ResultSet instance
 		ResultSet rs = stmt.executeQuery();
-
-		// We run a loop to process the results.
-		// The rs.next() method moves the result pointer to the next result row, and returns
-		// true if a row is present, and false otherwise
-		// Note that initially the result pointer points before the first row, so we have to call
-		// rs.next() the first time
+		
 		while (rs.next()) {
-			// Now that `rs` points to a valid row (rs.next() is true), we can use the `getString`
-			// and `getLong` methods to return each column value of the row as a string and long
-			// respectively, and print it to the console
 			System.out.printf("user_id:%d username:%s email:%s password_hash:%s group_id:%s%n", rs.getLong("user_id"),
 					rs.getString("username"), rs.getString("email"),rs.getString("password_hash"),rs.getString("group_id"));
-		}
-		
-		
+		}		
 	}
 	
 	void specialQuery() throws SQLException{
@@ -151,4 +145,41 @@ public class DBengine {
 		// Print out the number of inserted rows
 		System.out.printf("inserted %s customer(s)%n", insertedRows);
 	}
+
+	@Override
+	public void getDataForConnection() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void connectToDB() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void read() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }
+

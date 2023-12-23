@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import com.testQuickStart.DesktopSwingApp.Database.DBengine;
+import com.testQuickStart.DesktopSwingApp.Database.JDBCconnectionEngine;
 import com.testQuickStart.DesktopSwingApp.app.GUI.*;
 
 public class SwingDesktopApplication {

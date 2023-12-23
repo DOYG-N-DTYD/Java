@@ -24,7 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import com.testQuickStart.DesktopSwingApp.Database.DBengine;
+import com.testQuickStart.DesktopSwingApp.Database.JDBCconnectionEngine;
 import com.testQuickStart.DesktopSwingApp.Database.MysqlConnectionEngine;
 
 public class AuthorisationPanel {
@@ -154,10 +154,10 @@ public class AuthorisationPanel {
 			//posgresConnectionEngine();
 			break;
 		case 1: // mysql
-				//mysqlConnectionEngine();
+			//mysqlConnectionEngine();
 			System.out.println("TODO MysqlConnectionEngine");
-			MysqlConnectionEngine mce = new MysqlConnectionEngine();
-			mce.mysqlGetAllData();
+			MysqlConnectionEngine mce = new MysqlConnectionEngine(emailString,passwordString);
+			//mce.mysqlGetAllData();
 			break;
 		}
 		System.out.println(databaseChoise.getSelectedItem());
