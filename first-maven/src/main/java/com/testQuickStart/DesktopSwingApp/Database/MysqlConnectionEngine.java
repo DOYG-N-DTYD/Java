@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 public class MysqlConnectionEngine extends JDBCconnectionEngine{
 
 	private String driverTypeString = "jdbc";
@@ -23,12 +27,12 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 
 	public MysqlConnectionEngine(String usernameString, String passwordString) {
 		super(usernameString, passwordString);
-		Runnable mysqlConnectionRunnable = () -> {
-			connectToDB();
-			mysqlGetAllData();
-		};
-		Thread mysqlConnectionThread = new Thread(mysqlConnectionRunnable);
-		mysqlConnectionThread.start();
+//		Runnable mysqlConnectionRunnable = () -> {
+//			connectToDB();
+//			mysqlGetAllData();
+//		};
+//		Thread mysqlConnectionThread = new Thread(mysqlConnectionRunnable);
+//		mysqlConnectionThread.start();
 	}
 
 	private String connectionUrl() {
@@ -127,5 +131,14 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 	protected void update() {
 		// TODO Auto-generated method stub
 
+	}
+	public Thread runConnectionInthread(){
+		Runnable mysqlConnectionRunnable = () -> {
+			connectToDB();
+			mysqlGetAllData();
+		};
+		Thread mysqlConnectionThread = new Thread(mysqlConnectionRunnable);
+		mysqlConnectionThread.start();
+		return mysqlConnectionThread;
 	}
 }

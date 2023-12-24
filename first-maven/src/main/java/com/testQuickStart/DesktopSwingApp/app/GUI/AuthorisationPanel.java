@@ -14,8 +14,10 @@ import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -150,19 +152,59 @@ public class AuthorisationPanel {
 		System.out.println("databaseChoise.getSelectedIndex() = " + databaseChoise.getSelectedIndex());
 		switch (databaseChoise.getSelectedIndex()) {
 		case 0: // postgres
-			System.out.println("TODO postges");	
-			//posgresConnectionEngine();
+			System.out.println("TODO postges");
+			// posgresConnectionEngine();
 			break;
 		case 1: // mysql
-			//mysqlConnectionEngine();
-			System.out.println("TODO MysqlConnectionEngine");
-			MysqlConnectionEngine mce = new MysqlConnectionEngine(emailString,passwordString);
+			// mysqlConnectionEngine();
+			connectMYSQL(emailString,passwordString);
 			//mce.mysqlGetAllData();
 			break;
 		}
 		System.out.println(databaseChoise.getSelectedItem());
-		//DBengine dBengine = new DBengine(dbType, emailString, passwordString);
+		// DBengine dBengine = new DBengine(dbType, emailString, passwordString);
 
 		// dBengine.allData();
+	}
+
+	private void loadingFrameWhileDBconnection() {
+		// TODO:
+		JFrame loadingFrame = new JFrame("mysql database connection");
+
+		ImageIcon loading = new ImageIcon("ajax-loader.gif");
+		loadingFrame.add(new JLabel("Setting mysql database connection... ", loading, JLabel.CENTER));
+
+		loadingFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loadingFrame.setSize(panelWidth, panelHeight);
+		loadingFrame.setVisible(true);
+	}
+	
+	
+	
+	private void enableAuthorisationPanel() {
+		Component[] AuthPanelComponents = authorisationPanel.getComponents();
+		for (Component AuthPanelcomponent : AuthPanelComponents) {
+			AuthPanelcomponent.setEnabled(true);
+		}
+	}
+	private void disableAuthorisationPanel() {
+		Component[] AuthPanelComponents = authorisationPanel.getComponents();
+		for (Component AuthPanelcomponent : AuthPanelComponents) {
+			AuthPanelcomponent.setEnabled(false);
+		}
+	}
+	private void connectMYSQL(String emailString, String passwordString) {
+		System.out.println("TODO MysqlConnectionEngine");
+		MysqlConnectionEngine mce = new MysqlConnectionEngine(emailString, passwordString);
+		//loadingFrameWhileDBconnection(); TODO: all components must be shown
+		disableAuthorisationPanel();
+		try {
+			mce.runConnectionInthread().join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		enableAuthorisationPanel();
+		// TODO alert about success/false
 	}
 }
