@@ -100,8 +100,13 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 			System.out.println("connectionUrl() 		-> " + connectionUrl());
 			System.out.println("super.getUserName()		-> " + super.getUserName());
 			System.out.println("super.getUserPassword	-> " + super.getUserPassword());
+			long startTime = System.nanoTime();
+			
+			
 			mysqlConnection = DriverManager.getConnection(connectionUrl(), super.getUserName(),
 					super.getUserPassword());
+			long endTime = System.nanoTime();
+			System.out.println("TIME " + (endTime - startTime) / 1000000000);
 			System.out.println("Succes, MysqlConnection OK");
 			System.out.println("Thread stopped");
 		} catch (Exception e) {

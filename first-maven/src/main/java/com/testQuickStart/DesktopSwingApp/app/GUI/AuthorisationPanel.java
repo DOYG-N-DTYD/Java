@@ -198,12 +198,11 @@ public class AuthorisationPanel {
 		MysqlConnectionEngine mce = new MysqlConnectionEngine(emailString, passwordString);
 		//loadingFrameWhileDBconnection(); TODO: all components must be shown
 		disableAuthorisationPanel();
-		try {
-			mce.runConnectionInthread().join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		};
+		
+		ProgressBar connectionProgressBar = new ProgressBar();
+		connectionProgressBar.runProgressBarInThread();
+		mce.runConnectionInthread();//.join();
+		
 		enableAuthorisationPanel();
 		// TODO alert about success/false
 	}
