@@ -9,6 +9,10 @@ import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import com.testQuickStart.DesktopSwingApp.app.GUI.AuthorisationPanel;
+import com.testQuickStart.DesktopSwingApp.app.GUI.ProgressBar;
 
 public class MysqlConnectionEngine extends JDBCconnectionEngine{
 
@@ -27,12 +31,6 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 
 	public MysqlConnectionEngine(String usernameString, String passwordString) {
 		super(usernameString, passwordString);
-//		Runnable mysqlConnectionRunnable = () -> {
-//			connectToDB();
-//			mysqlGetAllData();
-//		};
-//		Thread mysqlConnectionThread = new Thread(mysqlConnectionRunnable);
-//		mysqlConnectionThread.start();
 	}
 
 	private String connectionUrl() {
@@ -91,7 +89,6 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 
 	@Override
 	protected void connectToDB() {
-		// TODO Auto-generated method stub
 		try {
 			// TODO loading screen
 			// mysqlConnection =
@@ -138,12 +135,19 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 
 	}
 	public Thread runConnectionInthread(){
+		
 		Runnable mysqlConnectionRunnable = () -> {
+			//parentPanel.disableAuthorisationPanel();
 			connectToDB();
-			mysqlGetAllData();
+			//parentPanel.enableAuthorisationPanel();
 		};
 		Thread mysqlConnectionThread = new Thread(mysqlConnectionRunnable);
 		mysqlConnectionThread.start();
+		
+		String connectionFrameNameString = "Connection To MYSQL databse";
+		ProgressBar connectionProgressBar = new ProgressBar(connectionFrameNameString, mysqlConnectionThread);
+		//connectionProgressBar.runProgressBarInThread();
+		
 		return mysqlConnectionThread;
 	}
 }

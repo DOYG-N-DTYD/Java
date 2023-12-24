@@ -181,13 +181,13 @@ public class AuthorisationPanel {
 	
 	
 	
-	private void enableAuthorisationPanel() {
+	public void enableAuthorisationPanel() {
 		Component[] AuthPanelComponents = authorisationPanel.getComponents();
 		for (Component AuthPanelcomponent : AuthPanelComponents) {
 			AuthPanelcomponent.setEnabled(true);
 		}
 	}
-	private void disableAuthorisationPanel() {
+	public void disableAuthorisationPanel() {
 		Component[] AuthPanelComponents = authorisationPanel.getComponents();
 		for (Component AuthPanelcomponent : AuthPanelComponents) {
 			AuthPanelcomponent.setEnabled(false);
@@ -197,13 +197,13 @@ public class AuthorisationPanel {
 		System.out.println("TODO MysqlConnectionEngine");
 		MysqlConnectionEngine mce = new MysqlConnectionEngine(emailString, passwordString);
 		//loadingFrameWhileDBconnection(); TODO: all components must be shown
-		disableAuthorisationPanel();
+		this.authorisationPanel.setVisible(false);
 		
-		ProgressBar connectionProgressBar = new ProgressBar();
-		connectionProgressBar.runProgressBarInThread();
-		mce.runConnectionInthread();//.join();
-		
-		enableAuthorisationPanel();
+		//ProgressBar connectionProgressBar = new ProgressBar();
+		//connectionProgressBar.runProgressBarInThread();
+		mce.runConnectionInthread();//.join(); //send object to make changes with it in thread 
+		//enableAuthorisationPanel();
+		//enableAuthorisationPanel();
 		// TODO alert about success/false
 	}
 }

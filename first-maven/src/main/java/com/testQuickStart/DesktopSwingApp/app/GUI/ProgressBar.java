@@ -5,61 +5,61 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class ProgressBar extends JFrame{
-
-	// create a frame
     static JFrame progressBarFrame;
- 
     static JProgressBar progressBar;
  
-    public ProgressBar()
+    private Thread threadToServe;
+    private Thread progressBarThread ;
+    
+    public ProgressBar(String progresBarNameString, Thread servedThread)
     {
-    	
-        // create a frame
-    	progressBarFrame = new JFrame("ProgressBar demo");
- 
-        // create a panel
-        JPanel progresBarPanel = new JPanel();
- 
-        // create a progressbar
-        progressBar = new JProgressBar();
- 
-        // set initial value
-        progressBar.setValue(0);
- 
-        progressBar.setStringPainted(true);
- 
-        // add progressbar
-        progressBarFrame.add(progressBar);
- 
-        // add panel
-        progressBarFrame.add(progressBar);
- 
-        // set the size of the frame
-        progressBarFrame.setSize(500, 70);
-        progressBarFrame.setVisible(true);
- 
+    	initProgressBarFrame(progresBarNameString);
+    	this.threadToServe = servedThread;
+    	runProgressBarInThread();
     }
     
-    //public static void runProgressBarInThread() {}
+    private void initProgressBarFrame(String progresBarNameString) {
+    	Integer progresBarWidthInteger = 500;
+    	Integer progresBarHeightInteger = 70;
+    	progressBarFrame = new JFrame(progresBarNameString);
+    	progressBarFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JPanel progresBarPanel = new JPanel();
+        progressBar = new JProgressBar();
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        progressBarFrame.add(progressBar);
+        progressBarFrame.add(progressBar);
+        progressBarFrame.setSize(progresBarWidthInteger, progresBarHeightInteger);
+        progressBarFrame.setVisible(true);
+    }
     
-	public void runProgressBarInThread() {
+	private  void runProgressBarInThread() {
 		
-		Runnable progresBaRunnable = () -> {
+		Runnable progresBarRunnable = () -> {
 			int i = 0;
 	        try {
-	            while (i <= 100) {
+	            while (i <= 99) {
 	                // fill the menu bar
 	            	progressBar.setValue(i);
 	 
 	                // delay the thread
-	                Thread.sleep(200);
+	            	progressBarThread.sleep(200);
 	                i += 1;
+	                // if connected and served thread ended then notify
+	                if (!threadToServe.isAlive()) {
+						System.out.println("THREAD INTERRUPTED");
+						progressBar.setValue(100);
+						
+						System.gc();
+						progressBarFrame.dispose();
+						progressBarThread.interrupt();
+					}
 	            }
 	        }
 	        catch (Exception e) {
 	        }
 		};
-		Thread progressBarThread = new Thread(progresBaRunnable);
+		progressBarThread = new Thread(progresBarRunnable);
 		progressBarThread.start();	
 	}
 	
