@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Stack;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,12 +28,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.border.TitledBorder;
 
 import com.testQuickStart.DesktopSwingApp.Database.JDBCconnectionEngine;
 import com.testQuickStart.DesktopSwingApp.Database.MysqlConnectionEngine;
+import com.testQuickStart.DesktopSwingApp.app.SwingDesktopApplication;
 
-public class AuthorisationPanel {
+public class Authorisation {
+	private MainFrame mainFrame;
+	
 	private JPanel authorisationPanel;
 	private JTextField usernameField;
 	private JTextField passwordField;
@@ -47,7 +55,8 @@ public class AuthorisationPanel {
 
 	private JComboBox databaseChoise;
 
-	public AuthorisationPanel() {
+	public Authorisation() {
+		//mainFrame = frame;
 		authorisationPanel = new JPanel();
 		authorisationPanel.setLayout(new BoxLayout(authorisationPanel, BoxLayout.Y_AXIS));
 		authorisationPanel.setMinimumSize(new Dimension(panelWidth, panelHeight));
@@ -135,6 +144,7 @@ public class AuthorisationPanel {
 		String regex = "^(.+)@(.+)$"; // check email
 		Pattern patternForEmail = Pattern.compile(regex);
 		Matcher matchEmail = patternForEmail.matcher(userEmail);
+		// TODO
 		// if (matchEmail.matches()) {
 		try {
 			connectDB(userEmail, password);
@@ -147,7 +157,6 @@ public class AuthorisationPanel {
 	}
 
 	private void connectDB(String emailString, String passwordString) throws SQLException {
-		// TODO
 		String dbType = databaseChoise.getSelectedItem().toString();
 		System.out.println("databaseChoise.getSelectedIndex() = " + databaseChoise.getSelectedIndex());
 		switch (databaseChoise.getSelectedIndex()) {
@@ -156,15 +165,9 @@ public class AuthorisationPanel {
 			// posgresConnectionEngine();
 			break;
 		case 1: // mysql
-			// mysqlConnectionEngine();
 			connectMYSQL(emailString,passwordString);
-			//mce.mysqlGetAllData();
 			break;
 		}
-		System.out.println(databaseChoise.getSelectedItem());
-		// DBengine dBengine = new DBengine(dbType, emailString, passwordString);
-
-		// dBengine.allData();
 	}
 
 	private void loadingFrameWhileDBconnection() {
@@ -194,16 +197,17 @@ public class AuthorisationPanel {
 		}
 	}
 	private void connectMYSQL(String emailString, String passwordString) {
-		System.out.println("TODO MysqlConnectionEngine");
+
 		MysqlConnectionEngine mce = new MysqlConnectionEngine(emailString, passwordString);
-		//loadingFrameWhileDBconnection(); TODO: all components must be shown
-		this.authorisationPanel.setVisible(false);
+		authorisationPanel.setVisible(false);
+		mce.runConnectionInthread(mainFrame);
+		// TODO block before future success connection (Wait untill thread finish)
+		//authorisationPanel.setVisible(true);
 		
-		//ProgressBar connectionProgressBar = new ProgressBar();
-		//connectionProgressBar.runProgressBarInThread();
-		mce.runConnectionInthread();//.join(); //send object to make changes with it in thread 
-		//enableAuthorisationPanel();
-		//enableAuthorisationPanel();
 		// TODO alert about success/false
+	}
+	
+	public void setMainFrame(MainFrame frame) {
+		this.mainFrame = frame;
 	}
 }

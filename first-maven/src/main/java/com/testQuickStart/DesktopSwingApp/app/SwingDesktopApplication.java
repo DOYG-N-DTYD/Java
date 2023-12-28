@@ -22,16 +22,7 @@ public class SwingDesktopApplication {
 
     public static void main(String[] args) throws SQLException {
     	SwingUtilities.invokeLater(() -> {
-            createAndShowGUI();
+    		MainFrame mainFrame = new MainFrame();
         });
     }
-
-    public static void createAndShowGUI() {
-    	
-    	MainFrame mainFrame = new MainFrame();
-    	mainFrame.loadAuthorisationPanel(new AuthorisationPanel());
-    	//mainFrame.loadChat(new Chat());
-    	//mainFrame.loadCanvas(new Canvas());
-    }
-
 }

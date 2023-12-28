@@ -1,5 +1,7 @@
 package com.testQuickStart.DesktopSwingApp.app.GUI;
 
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -11,10 +13,13 @@ public class ProgressBar extends JFrame{
     private Thread threadToServe;
     private Thread progressBarThread ;
     
-    public ProgressBar(String progresBarNameString, Thread servedThread)
+    private MainFrame mainFrame;
+    
+    public ProgressBar(String progresBarNameString, Thread servedThread, MainFrame frame)
     {
     	initProgressBarFrame(progresBarNameString);
     	this.threadToServe = servedThread;
+    	this.mainFrame = frame;
     	runProgressBarInThread();
     }
     
@@ -27,7 +32,6 @@ public class ProgressBar extends JFrame{
         progressBar = new JProgressBar();
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
-        progressBarFrame.add(progressBar);
         progressBarFrame.add(progressBar);
         progressBarFrame.setSize(progresBarWidthInteger, progresBarHeightInteger);
         progressBarFrame.setVisible(true);
@@ -52,6 +56,10 @@ public class ProgressBar extends JFrame{
 						
 						System.gc();
 						progressBarFrame.dispose();
+						// TODO: hmmmmmm, change object in progress bar thread is it good idea ? hmmmm
+						//mainFrame.getAuthorisation().getAuthorisationPanel().setVisible(true);
+						//mainFrame.clo
+						mainFrame.notifyFrame();
 						progressBarThread.interrupt();
 					}
 	            }

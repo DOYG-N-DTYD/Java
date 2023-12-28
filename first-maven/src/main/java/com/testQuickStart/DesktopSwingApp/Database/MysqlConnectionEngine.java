@@ -11,7 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.testQuickStart.DesktopSwingApp.app.GUI.AuthorisationPanel;
+import com.testQuickStart.DesktopSwingApp.app.GUI.Authorisation;
+import com.testQuickStart.DesktopSwingApp.app.GUI.MainFrame;
 import com.testQuickStart.DesktopSwingApp.app.GUI.ProgressBar;
 
 public class MysqlConnectionEngine extends JDBCconnectionEngine{
@@ -105,7 +106,7 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 			long endTime = System.nanoTime();
 			System.out.println("TIME " + (endTime - startTime) / 1000000000);
 			System.out.println("Succes, MysqlConnection OK");
-			System.out.println("Thread stopped");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,7 +135,7 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 		// TODO Auto-generated method stub
 
 	}
-	public Thread runConnectionInthread(){
+	public Thread runConnectionInthread(MainFrame frame){
 		
 		Runnable mysqlConnectionRunnable = () -> {
 			//parentPanel.disableAuthorisationPanel();
@@ -144,8 +145,10 @@ public class MysqlConnectionEngine extends JDBCconnectionEngine{
 		Thread mysqlConnectionThread = new Thread(mysqlConnectionRunnable);
 		mysqlConnectionThread.start();
 		
+		//mysqlConnectionThread.addUpl
+		
 		String connectionFrameNameString = "Connection To MYSQL databse";
-		ProgressBar connectionProgressBar = new ProgressBar(connectionFrameNameString, mysqlConnectionThread);
+		ProgressBar connectionProgressBar = new ProgressBar(connectionFrameNameString, mysqlConnectionThread, frame);
 		//connectionProgressBar.runProgressBarInThread();
 		
 		return mysqlConnectionThread;

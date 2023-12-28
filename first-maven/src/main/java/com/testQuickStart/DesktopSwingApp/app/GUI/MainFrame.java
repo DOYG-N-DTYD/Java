@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 public class MainFrame extends JFrame{
+	private Authorisation authorisation;
 	private JFrame mainFrame;
-	
 	public MainFrame() {
 		Integer minimumWidth = 500;
 		Integer minimumHeight = 160;
@@ -19,12 +19,13 @@ public class MainFrame extends JFrame{
         frame.setLayout(new BorderLayout());
         frame.setMinimumSize(new Dimension(minimumWidth, minimumHeight));
         frame.setVisible(true);
-        this.mainFrame = frame; 
+        this.mainFrame = frame;
+        loadAuthorisationPanel(new Authorisation());
 	}
 
 	public void loadCanvas(Canvas canvas) {
 		//Create a canvas for drawing on the right side
-        mainFrame.add(canvas, BorderLayout.CENTER);
+		mainFrame.add(canvas, BorderLayout.CENTER);
 	}
 	
 	public void loadChat(Chat chat) {
@@ -32,12 +33,35 @@ public class MainFrame extends JFrame{
 		mainFrame.add(chat.getChatPanel(),BorderLayout.WEST);
 	}
 	
-	public void loadAuthorisationPanel(AuthorisationPanel authorisationPanel) {
+	public void loadAuthorisationPanel(Authorisation authPanel) {
 		//Create log pass panel
-		mainFrame.add(authorisationPanel.getAuthorisationPanel());
+		authPanel.setMainFrame(this);
+		authorisation = authPanel;
+		mainFrame.add(authorisation.getAuthorisationPanel());
+	}
+	
+	public void notifyFrame() {
+		// TODO open in new frame, close old authorisation panel
+		System.out.println("Authorisation panel notified !!!");
+		System.out.println("All threads are finished for loading main frame, loading main...");
+		//authorisation.getAuthorisationPanel().setVisible(true);
+		mainFrame.dispose();
+		JFrame frame = new JFrame("Canvas with Database Connection");
+		mainFrame = frame;
+		frame.setMinimumSize(new Dimension(800,600));
+		frame.setLayout(new BorderLayout());
+		frame.add((new Chat()).getChatPanel(),BorderLayout.WEST);
+		frame.add(new Canvas(),BorderLayout.CENTER);
+		frame.setVisible(true);
+		//		loadCanvas(new Canvas());
+//		loadChat(new Chat());
 	}
 	
 	public JFrame getFrame() {
-		return mainFrame;
+		return this;
+	}
+	
+	public Authorisation getAuthorisation() {
+		return authorisation;
 	}
 }
