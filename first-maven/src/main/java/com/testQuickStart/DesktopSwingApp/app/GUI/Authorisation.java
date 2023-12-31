@@ -132,8 +132,10 @@ public class Authorisation {
 				// hash pass
 				// 2 factor verification
 				// forgot password
-				String username = usernameField.getText();
-				String password = passwordField.getText();
+				String username = "mzdev_moderator"; 
+						//usernameField.getText();
+				String password = "stone11051996";
+						//passwordField.getText();
 				// JOptionPane.showMessageDialog(null, "This is even shorter");
 				checkCredentials(username, password);
 			}

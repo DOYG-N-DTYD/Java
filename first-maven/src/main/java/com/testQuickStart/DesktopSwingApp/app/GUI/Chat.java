@@ -23,11 +23,17 @@ public class Chat extends Component{
 	private JTextField messageTextField;
 	private Stack<String> chatStack;
  	
+	private Integer parentFrameWidth;
+	private Integer parentFrameHeight;
+	
 	private Integer inputWidth = 600;
 	private Integer inputHeight = 22;
 	
-	public Chat() {
+	public Chat(Integer _parentFrameWidth, Integer _parentFrameHeight) {
 		// TODO: constructor
+		parentFrameWidth = _parentFrameWidth;
+		parentFrameHeight = _parentFrameHeight;
+		chatStack = new Stack<String>();
 		createChatGUI();
 	}
 	
@@ -87,18 +93,18 @@ public class Chat extends Component{
 	}
 
 	private void addMessageToStack() {
-		chatStack = new Stack<String>();
 		chatStack.add(messageTextField.getText());
 	}
 
 	private void displayMessagesFromStackInChat() {
 		StringBuilder formattedMessageToString = new StringBuilder();
-		for (int j = 0; j < 20 - chatStack.size(); j++) {
+		Integer chatRows = Math.round( (float) (parentFrameHeight / 18.75));
+		for (int j = 0; j < 32 - chatStack.size(); j++) { // 800, 600 -> 32 rows
 			formattedMessageToString.append("\n");
 		}
 		for (int i = 0; i < chatStack.size(); i++) {
 			StringBuilder chatMsg = new StringBuilder();
-			if (chatStack.size() >= 20) {
+			if (chatStack.size() >= 32) {
 				chatMsg.append("\n" + chatStack.get(i));
 			} else if (chatStack.size() == 1) {
 				chatMsg.append(chatStack.get(i));

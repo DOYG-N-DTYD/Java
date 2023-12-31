@@ -48,9 +48,11 @@ public class MainFrame extends JFrame{
 		mainFrame.dispose();
 		JFrame frame = new JFrame("Canvas with Database Connection");
 		mainFrame = frame;
-		frame.setMinimumSize(new Dimension(800,600));
+		Integer frameWidthInteger = 800;
+		Integer frameHeightInteger = 600;
+		frame.setMinimumSize(new Dimension(frameWidthInteger,frameHeightInteger));
 		frame.setLayout(new BorderLayout());
-		frame.add((new Chat()).getChatPanel(),BorderLayout.WEST);
+		frame.add((new Chat(frameWidthInteger,frameHeightInteger)).getChatPanel(),BorderLayout.WEST);
 		frame.add(new Canvas(),BorderLayout.CENTER);
 		frame.setVisible(true);
 		//		loadCanvas(new Canvas());
