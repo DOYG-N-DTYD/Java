@@ -99,12 +99,12 @@ public class Chat extends Component{
 	private void displayMessagesFromStackInChat() {
 		StringBuilder formattedMessageToString = new StringBuilder();
 		Integer chatRows = Math.round( (float) (parentFrameHeight / 18.75));
-		for (int j = 0; j < 32 - chatStack.size(); j++) { // 800, 600 -> 32 rows
+		for (int j = 0; j < chatRows - chatStack.size(); j++) { // 800, 600 -> 32 rows
 			formattedMessageToString.append("\n");
 		}
 		for (int i = 0; i < chatStack.size(); i++) {
 			StringBuilder chatMsg = new StringBuilder();
-			if (chatStack.size() >= 32) {
+			if (chatStack.size() >= chatRows) {
 				chatMsg.append("\n" + chatStack.get(i));
 			} else if (chatStack.size() == 1) {
 				chatMsg.append(chatStack.get(i));
