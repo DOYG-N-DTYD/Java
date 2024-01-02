@@ -1,42 +1,40 @@
-package com.testQuickStart.TestFiles;
+package com.testQuickStart.DesktopSwingApp.FileEngine;
 
-import java.awt.Frame;
-import java.awt.Taskbar.Feature;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.nio.file.Path;
-import java.security.PublicKey;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.sound.midi.Soundbank;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 //FileEngine fe = new FileEngine();
-		//fe.createFile();
-		//fe.showFileInfo();
-		//fe.showMenu();
+//fe.createFile();
+//fe.showFileInfo();
+//fe.showMenu();
 //  	getUserCommand("-rf");
 //  	getUserCommand("-cf");
 //  	getUserCommand("-wf");
 //  	getUserCommand("--------rf");
 //  	getUserCommand("-rff");
 //  	getUserCommand("--rff");
-  	
+
 //  	FileEngine fe = new FileEngine();
 //  	fe.menu();
 
-
 public class FileEngine {
 	public FileEngine() {
+		try {
+			menu();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void showProperties() {
@@ -62,7 +60,7 @@ public class FileEngine {
 			String lineString;
 			FileReader freader = new FileReader(fileChooser());
 			BufferedReader bufferedReader = new BufferedReader(freader);
-			while ((lineString=bufferedReader.readLine())!= null) {
+			while ((lineString = bufferedReader.readLine()) != null) {
 				System.out.println(lineString);
 			}
 			bufferedReader.close();
@@ -82,18 +80,18 @@ public class FileEngine {
 					bufferedWriter.close();
 					return;
 				} else {
-					bufferedWriter.write(lineString+"\n");
+					bufferedWriter.write(lineString + "\n");
 				}
-				
+
 			}
 		} catch (Exception e) {
-			
+
 		}
 	}
 
 	public File fileChooser() {
 		JFileChooser f = new JFileChooser();
-		//f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		// f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		f.showSaveDialog(null);
 		return f.getSelectedFile();
 	}
@@ -108,7 +106,8 @@ public class FileEngine {
 				switch (getUserCommand(userInput())) {
 				case "-cf":
 					System.out.println("Creating file");
-					createFile(fileChooser().getPath());
+					System.out.println(fileChooser().getPath());
+					//createFile(fileChooser().getPath());
 					break;
 				case "-rf":
 					System.out.println("Reading file");
