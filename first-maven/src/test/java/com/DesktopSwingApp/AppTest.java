@@ -1,4 +1,4 @@
-package com.testQuickStart;
+package com.DesktopSwingApp;
 
 import static org.junit.Assert.assertTrue;
 
