@@ -1,4 +1,4 @@
-package com.testQuickStart.DesktopSwingApp.Database;
+package com.DesktopSwingApp.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

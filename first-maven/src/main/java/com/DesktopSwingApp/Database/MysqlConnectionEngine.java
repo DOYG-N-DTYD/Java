@@ -1,4 +1,4 @@
-package com.testQuickStart.DesktopSwingApp.Database;
+package com.DesktopSwingApp.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,9 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.testQuickStart.DesktopSwingApp.app.GUI.Authorisation;
-import com.testQuickStart.DesktopSwingApp.app.GUI.MainFrame;
-import com.testQuickStart.DesktopSwingApp.app.GUI.ProgressBar;
+import com.DesktopSwingApp.app.GUI.Authorisation;
+import com.DesktopSwingApp.app.GUI.MainFrame;
+import com.DesktopSwingApp.app.GUI.ProgressBar;
 
 public class MysqlConnectionEngine extends JDBCconnectionEngine{
 

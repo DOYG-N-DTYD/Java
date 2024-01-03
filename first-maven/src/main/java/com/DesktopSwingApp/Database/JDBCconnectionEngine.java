@@ -1,4 +1,4 @@
-package com.testQuickStart.DesktopSwingApp.Database;
+package com.DesktopSwingApp.Database;
 
 public abstract class JDBCconnectionEngine extends Thread{
 	private String driverTypeString;

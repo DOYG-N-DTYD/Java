@@ -1,4 +1,4 @@
-package com.testQuickStart.DesktopSwingApp.app.GUI;
+package com.DesktopSwingApp.app.GUI;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

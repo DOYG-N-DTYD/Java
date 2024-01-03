@@ -1,4 +1,4 @@
-package com.testQuickStart.DesktopSwingApp.app;
+package com.DesktopSwingApp.app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,9 +16,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse.File;
-import com.testQuickStart.DesktopSwingApp.Database.JDBCconnectionEngine;
-import com.testQuickStart.DesktopSwingApp.FileEngine.FileEngine;
-import com.testQuickStart.DesktopSwingApp.app.GUI.*;
+import com.DesktopSwingApp.Database.JDBCconnectionEngine;
+import com.DesktopSwingApp.FileEngine.FileEngine;
+import com.DesktopSwingApp.app.GUI.*;
 
 public class SwingDesktopApplication {
 
