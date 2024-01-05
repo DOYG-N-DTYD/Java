@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -44,13 +45,10 @@ public class FileEngine {
 
 	public void createFile(String _dir) {
 		try {
-			File file = new File(_dir + "/" + "text.txt");
-			if (file.createNewFile()) {
-				System.out.println("File created");
-			} else {
-				System.out.println("File already exists");
-			}
-		} catch (Exception e) {
+			File file = new File(_dir + ".txt");
+			file.createNewFile();
+		} 
+		catch (Exception e) {
 			System.out.println(e);
 		}
 	}
@@ -106,8 +104,9 @@ public class FileEngine {
 				switch (getUserCommand(userInput())) {
 				case "-cf":
 					System.out.println("Creating file");
-					System.out.println(fileChooser().getPath());
-					//createFile(fileChooser().getPath());
+					String pathToCreateFile = fileChooser().getPath();
+					System.out.println(pathToCreateFile);
+					createFile(pathToCreateFile);
 					break;
 				case "-rf":
 					System.out.println("Reading file");
@@ -125,12 +124,12 @@ public class FileEngine {
 					System.out.println("HMM REGEXP ");
 					break;
 				}
-				Runtime.getRuntime().exec("clear");
+				//Runtime.getRuntime().exec("clear");
 				showMenu();
 			} catch (Exception e) {
 				// TODO: handle exception
 				// clearConsole();
-				Runtime.getRuntime().exec("clear");
+				// Runtime.getRuntime().exec("clear");
 				System.out.println(e);
 			}
 
