@@ -24,8 +24,8 @@ public class SwingDesktopApplication {
 
     public static void main(String[] args) throws SQLException {
     	SwingUtilities.invokeLater(() -> {
-    		//MainFrame mainFrame = new MainFrame();
+    		MainFrame mainFrame = new MainFrame();
         });
-    	FileEngine fEngine = new FileEngine();
+    	//FileEngine fEngine = new FileEngine();
     }
 }

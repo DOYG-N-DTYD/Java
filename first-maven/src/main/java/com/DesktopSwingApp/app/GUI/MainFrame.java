@@ -2,10 +2,13 @@ package com.DesktopSwingApp.app.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.rmi.server.LoaderHandler;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class MainFrame extends JFrame{
 	private Authorisation authorisation;
@@ -13,7 +16,6 @@ public class MainFrame extends JFrame{
 	public MainFrame() {
 		Integer minimumWidth = 500;
 		Integer minimumHeight = 160;
-		
 		JFrame frame = new JFrame("Canvas with Database Connection");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -21,6 +23,19 @@ public class MainFrame extends JFrame{
         frame.setVisible(true);
         this.mainFrame = frame;
         loadAuthorisationPanel(new Authorisation());
+		submenu();
+	}
+	public void submenu(){
+		JMenuBar menubar = new JMenuBar();
+		ImageIcon iconNew = new ImageIcon("new.png");
+		JMenu file = new JMenu("File");
+		
+		JMenuItem fileNew = new JMenuItem("New", iconNew);
+		fileNew.setMnemonic(KeyEvent.VK_N);
+		
+		file.add(fileNew);
+		menubar.add(file);
+		mainFrame.add(menubar);
 	}
 
 	public void loadCanvas(Canvas canvas) {
