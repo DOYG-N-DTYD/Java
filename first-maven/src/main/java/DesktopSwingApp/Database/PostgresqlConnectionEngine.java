@@ -1,4 +1,4 @@
-package com.DesktopSwingApp.Database;
+package DesktopSwingApp.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package com.DesktopSwingApp.app.GUI;
+package DesktopSwingApp.app.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -31,9 +31,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import javax.swing.border.TitledBorder;
 
-import com.DesktopSwingApp.Database.JDBCconnectionEngine;
-import com.DesktopSwingApp.Database.MysqlConnectionEngine;
-import com.DesktopSwingApp.app.SwingDesktopApplication;
+import DesktopSwingApp.Database.JDBCconnectionEngine;
+import DesktopSwingApp.Database.MysqlConnectionEngine;
+import DesktopSwingApp.app.SwingDesktopApplication;
 
 public class Authorisation {
 	private MainFrame mainFrame;

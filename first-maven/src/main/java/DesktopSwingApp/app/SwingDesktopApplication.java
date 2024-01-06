@@ -1,4 +1,4 @@
-package com.DesktopSwingApp.app;
+package DesktopSwingApp.app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,9 +16,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse.File;
-import com.DesktopSwingApp.Database.JDBCconnectionEngine;
-import com.DesktopSwingApp.FileEngine.FileEngine;
-import com.DesktopSwingApp.app.GUI.*;
+
+import DesktopSwingApp.Database.JDBCconnectionEngine;
+import DesktopSwingApp.FileEngine.FileEngine;
+import DesktopSwingApp.app.GUI.*;
 
 public class SwingDesktopApplication {
 

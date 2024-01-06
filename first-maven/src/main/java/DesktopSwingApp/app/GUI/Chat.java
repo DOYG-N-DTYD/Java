@@ -1,4 +1,4 @@
-package com.DesktopSwingApp.app.GUI;
+package DesktopSwingApp.app.GUI;
 
 import java.awt.Component;
 import java.awt.Dimension;

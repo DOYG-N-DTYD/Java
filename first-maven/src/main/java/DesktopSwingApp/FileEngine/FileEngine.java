@@ -1,4 +1,4 @@
-package com.DesktopSwingApp.FileEngine;
+package DesktopSwingApp.FileEngine;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
