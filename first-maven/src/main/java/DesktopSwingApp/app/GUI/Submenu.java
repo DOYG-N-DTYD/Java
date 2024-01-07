@@ -16,13 +16,11 @@ public class Submenu extends JMenuBar {
 	
 	public Submenu() {
 		initSubmenu();
-		//initTestSubmenu();
 	}
 	public JMenuBar getMenuBar() {
 		return menubar;
 	}
 	private void initSubmenu() {
-		//JFrame frame = new JFrame("Test");
 
 		menubar = new JMenuBar();
 		menubar.setMinimumSize(new Dimension(100, 30));
@@ -43,9 +41,6 @@ public class Submenu extends JMenuBar {
 		file.add(fileSave);
 
 		menubar.add(file);
-//		frame.setJMenuBar(menubar);
-//		frame.setLayout(null);
-//		frame.setVisible(true);
 	}
 
 //	private void initTestSubmenu() {
