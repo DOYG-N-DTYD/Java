@@ -15,8 +15,7 @@ public class MainFrame extends JFrame{
 	private JFrame mainFrame;
 
 	public MainFrame() {
-		// TEMP FOR TESTING
-		//submenu();
+		notifyFrame();
 	}
 //	public MainFrame() {
 //		Integer minimumWidth = 500;
@@ -58,7 +57,9 @@ public class MainFrame extends JFrame{
 		//authorisation.getAuthorisationPanel().setVisible(true);
 		//mainFrame.dispose();
 		JFrame frame = new JFrame("Canvas with Database Connection");
-		//mainFrame = frame;
+		Submenu submenu = new Submenu();
+		frame.setJMenuBar(submenu.getMenuBar());
+		
 		Integer frameWidthInteger = 800;
 		Integer frameHeightInteger = 600;
 		frame.setMinimumSize(new Dimension(frameWidthInteger,frameHeightInteger));
@@ -66,9 +67,6 @@ public class MainFrame extends JFrame{
 		frame.add((new Chat(frameWidthInteger,frameHeightInteger)).getChatPanel(),BorderLayout.WEST);
 		frame.add(new Canvas(),BorderLayout.CENTER);
 		frame.setVisible(true);
-		//		loadCanvas(new Canvas());
-//		loadChat(new Chat());
-		//submenu(frame);
 	}
 	
 	public JFrame getFrame() {
