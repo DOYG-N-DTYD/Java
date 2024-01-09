@@ -56,7 +56,6 @@ public class Authorisation {
 	private JComboBox databaseChoise;
 
 	public Authorisation() {
-		//mainFrame = frame;
 		authorisationPanel = new JPanel();
 		authorisationPanel.setLayout(new BoxLayout(authorisationPanel, BoxLayout.Y_AXIS));
 		authorisationPanel.setMinimumSize(new Dimension(panelWidth, panelHeight));
@@ -204,8 +203,6 @@ public class Authorisation {
 		authorisationPanel.setVisible(false);
 		mce.runConnectionInthread(mainFrame);
 		// TODO block before future success connection (Wait untill thread finish)
-		//authorisationPanel.setVisible(true);
-		
 		// TODO alert about success/false
 	}
 	
