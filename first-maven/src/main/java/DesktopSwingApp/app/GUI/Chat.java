@@ -67,8 +67,6 @@ public class Chat extends Component{
         
         sendButton = new JButton("Send");
         messageTextField = new JTextField(1);
-        
-        //chatControlsPanel.setBorder(new TitledBorder("Chat controls"));
         chatControlsPanel.setMinimumSize(new Dimension(inputWidth,inputHeight));
 		chatControlsPanel.setLayout(new BoxLayout(chatControlsPanel ,BoxLayout.Y_AXIS));
 		messageTextField.setMaximumSize(new Dimension(inputWidth, inputHeight));
@@ -100,6 +98,7 @@ public class Chat extends Component{
 		StringBuilder formattedMessageToString = new StringBuilder();
 		Integer chatRows = Math.round( (float) (parentFrameHeight / 18.75));
 		for (int j = 0; j < chatRows - chatStack.size(); j++) { // 800, 600 -> 32 rows
+			// TODO: depends on app window size
 			formattedMessageToString.append("\n");
 		}
 		for (int i = 0; i < chatStack.size(); i++) {
