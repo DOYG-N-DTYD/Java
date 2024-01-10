@@ -90,24 +90,12 @@ public class PostgresqlConnectionEngine extends JDBCconnectionEngine{
 	
 	void specialQuery() throws SQLException{
 		System.out.println("specialQuery METHOD");
-		// Use the method we defined earlier to create a datasource
 		DataSource dataSource = createDataSource();
-
-		// get a connection from the datasource
 		Connection conn = dataSource.getConnection();
-
-		// Create a new statement on the connection
-		// Create a prepared statement with a query param denoted by "?"
-	
 		String queryString = "SELECT * FROM users WHERE username LIKE CONCAT (?,'%')";
 		//String queryString = "SELECT * FROM users WHERE username = ?";
 		PreparedStatement stmt = conn.prepareStatement(queryString);
-		// Set the value of the param. Param indexes begin from 1
-		// Since we want to set the value as a string, we use `setString`
-		// with the param index and param value as arguments
-		
 		stmt.setString(1, "m");
-
 		// Execute the query and read the results same as before
 		ResultSet rs = stmt.executeQuery();
 		
@@ -124,10 +112,9 @@ public class PostgresqlConnectionEngine extends JDBCconnectionEngine{
 	
 	public void insertQuery() throws SQLException {
 		System.out.println("insertQuery METHOD");
-		// Use the method we defined earlier to create a datasource
+
 		DataSource dataSource = createDataSource();
-		// Create a new insert statement with the bird and description values as query params
-		// get a connection from the datasource
+
 		Connection conn = dataSource.getConnection();
 				
 		PreparedStatement insertStmt =
