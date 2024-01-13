@@ -4,31 +4,39 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Stack;
 
+import javax.print.DocFlavor.INPUT_STREAM;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.BoxLayout;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.TitledBorder;
 
-public class Chat extends Component{
-	
+public class Chat extends Component {
+
 	private JPanel chatPanel;
 	private JTextArea chatTextArea;
 	private JScrollPane scrollPane;
 	private JButton sendButton;
 	private JTextField messageTextField;
 	private Stack<String> chatStack;
- 	
+
 	private Integer parentFrameWidth;
 	private Integer parentFrameHeight;
-	
+
 	private Integer inputWidth = 600;
 	private Integer inputHeight = 22;
-	
+
 	public Chat(Integer _parentFrameWidth, Integer _parentFrameHeight) {
 		// TODO: constructor
 		parentFrameWidth = _parentFrameWidth;
@@ -36,24 +44,28 @@ public class Chat extends Component{
 		chatStack = new Stack<String>();
 		createChatGUI();
 	}
-	
+
 	public JPanel getChatPanel() {
 		return chatPanel;
 	}
-	
+
 	private void createChatGUI() {
 		createChatPanel();
-        createTextArea();
-        createChatControls();
-		addEventClickSend(); 
+		createTextArea();
+		createChatControls();
+		initChatActions();
+	}
+
+	private void initChatActions() {
+		addEventClickSend();
 	}
 
 	private void createChatPanel() {
 		chatPanel = new JPanel();
 		chatPanel.setLayout(new BoxLayout(chatPanel, BoxLayout.Y_AXIS));
-        chatPanel.setBorder(new TitledBorder("Chat"));
+		chatPanel.setBorder(new TitledBorder("Chat"));
 	}
-	
+
 	private void createTextArea() {
 		chatTextArea = new JTextArea(10, 25);
 		scrollPane = new JScrollPane(chatTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -61,27 +73,28 @@ public class Chat extends Component{
 		chatTextArea.setEditable(true);
 		chatPanel.add(scrollPane);
 	}
-	
+
 	private void createChatControls() {
-        JPanel chatControlsPanel = new JPanel();
-        
-        sendButton = new JButton("Send");
-        messageTextField = new JTextField(1);
-        chatControlsPanel.setMinimumSize(new Dimension(inputWidth,inputHeight));
-		chatControlsPanel.setLayout(new BoxLayout(chatControlsPanel ,BoxLayout.Y_AXIS));
+		JPanel chatControlsPanel = new JPanel();
+
+		sendButton = new JButton("Send");
+		messageTextField = new JTextField(1);
+		messageTextFieldShortcuts();
+		chatControlsPanel.setMinimumSize(new Dimension(inputWidth, inputHeight));
+		chatControlsPanel.setLayout(new BoxLayout(chatControlsPanel, BoxLayout.Y_AXIS));
 		messageTextField.setMaximumSize(new Dimension(inputWidth, inputHeight));
-        chatControlsPanel.add(messageTextField);
+		chatControlsPanel.add(messageTextField);
 		chatControlsPanel.add(sendButton);
-		
-        chatPanel.add(chatControlsPanel);
+
+		chatPanel.add(chatControlsPanel);
 	}
-	
+
 	private void addEventClickSend() {
 		sendButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (messageTextField.getText().length() == 0) {
-					System.out.println("Empty msg"); //TODO: empy message alert to user && in user information panel
+					System.out.println("Empty msg"); // TODO: empy message alert to user && in user information panel
 				} else {
 					addMessageToStack();
 					displayMessagesFromStackInChat();
@@ -90,13 +103,17 @@ public class Chat extends Component{
 		});
 	}
 
+	private void messageTextFieldShortcuts() {
+		messageTextField.addKeyListener(new ChatShortcuts());
+	}
+
 	private void addMessageToStack() {
 		chatStack.add(messageTextField.getText());
 	}
 
 	private void displayMessagesFromStackInChat() {
 		StringBuilder formattedMessageToString = new StringBuilder();
-		Integer chatRows = Math.round( (float) (parentFrameHeight / 18.75));
+		Integer chatRows = Math.round((float) (parentFrameHeight / 18.75));
 		for (int j = 0; j < chatRows - chatStack.size(); j++) { // 800, 600 -> 32 rows
 			// TODO: depends on app window size
 			formattedMessageToString.append("\n");
@@ -107,13 +124,12 @@ public class Chat extends Component{
 				chatMsg.append("\n" + chatStack.get(i));
 			} else if (chatStack.size() == 1) {
 				chatMsg.append(chatStack.get(i));
-			}else{
-				chatMsg.append("\n"+chatStack.get(i));
+			} else {
+				chatMsg.append("\n" + chatStack.get(i));
 			}
 			formattedMessageToString.append(chatMsg.toString());
 		}
 		chatTextArea.setText(formattedMessageToString.toString());
 		messageTextField.setText("");
 	}
-	
 }
