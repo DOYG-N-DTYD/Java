@@ -2,6 +2,11 @@ package com.FirstExample;
 
 import java.awt.Color;
 
+// Trinagles simple polygons
+// A surface can not be formed with less than three vertices
+// Triangles must be flat
+
+
 public class Triangle {
     Vertex v1;
     Vertex v2;
