@@ -5,6 +5,9 @@ public class Matrix3 {
     Matrix3(double[] values) {
         this.values = values;
     }
+    
+    // матрица поворота TODO: для n пространств
+    
     Matrix3 multiply(Matrix3 other) {
         double[] result = new double[9];
         for (int row = 0; row < 3; row++) {

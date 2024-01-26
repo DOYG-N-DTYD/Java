@@ -28,7 +28,9 @@ public class Engine3D {
                     Graphics2D g2 = (Graphics2D) g;
                     g2.setColor(Color.BLACK);
                     g2.fillRect(0, 0, getWidth(), getHeight());
-
+                    
+                    // four triangles with different colors
+                    
                     List<Triangle> tris = new ArrayList<>();
                     tris.add(new Triangle(new Vertex(100, 100, 100),
                                           new Vertex(-100, -100, 100),
