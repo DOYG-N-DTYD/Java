@@ -750,3 +750,15 @@ java.lang.Exception: Resource '/taco-cloud/src/main/java/tacos/TacoCloudApplicat
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1432)
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-02-09 14:36:13.784
+!MESSAGE Classpath changed for project: taco-cloud
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-02-09 14:36:13.785
+!MESSAGE Boot project ADDED: taco-cloud
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-02-09 14:36:14.573
+!MESSAGE Classpath changed for project: taco-cloud
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-02-09 14:36:22.654
+!MESSAGE Classpath changed for project: taco-cloud
