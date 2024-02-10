@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class Ingredient {
-	private String id = "";
-	private String name = "";
-	private Type type = null;
+	private String id;
+	private String name;
+	private Type type;
 	
 	public Ingredient(String idString, String nameString, Type ingridientType) {
 		this.id = idString;
