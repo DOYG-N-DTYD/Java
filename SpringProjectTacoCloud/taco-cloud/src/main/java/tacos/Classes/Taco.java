@@ -8,5 +8,5 @@ import lombok.Data;
 public class Taco {
 	
 	private String name;
-	private ListModel<Ingridient> ingridients;
+	private ListModel<Ingredient> ingridients;
 }
