@@ -22,4 +22,11 @@ public class Ingredient {
 		// TODO Auto-generated method stub
 		return this.type;
 	}
+	
+	public String id() {
+		return this.id;
+	}
+	public String name() {
+		return this.name;
+	}
 }
