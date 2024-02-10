@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -31,6 +32,9 @@ import tacos.Classes.TacoOrder;
 //объект поддерживается на уровне сеанса
 
 public class DesignTacoController {
+	private static final org.slf4j.Logger log =
+			 org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
+	
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
 		List<Ingredient> ingredients = Arrays.asList(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
@@ -62,5 +66,13 @@ public class DesignTacoController {
 
 	private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
 		return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+	}
+
+	@PostMapping
+	// @PostMapping -> сообщает @RequestMapping на уровне класса, что processTaco() обрабатывает запросы POST с путём /design
+	public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {	// использовать объект TacoOrder, который был помещен в модель методом order() 
+		tacoOrder.addTaco(taco);
+		log.info("Processing taco: {}", taco);
+		return "redirect:/orders/current";
 	}
 }
