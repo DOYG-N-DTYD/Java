@@ -1,9 +1,9 @@
 package tacos.Classes;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.swing.ListModel;
 
 import jakarta.validation.constraints.NotNull;
@@ -20,9 +20,19 @@ public class Taco {
 	@Size(min = 1, message = "You must choose at least 1 ingredient")
 	private List<Ingredient> ingredients;
 
+	private Date createdAt = new Date();
+	
 	public String getName() {
 		return name;
 	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+//	public void setCreatedAt(Date createdAt) {
+//		this.createdAt = createdAt;
+//	}
 
 	public void setName(String name) {
 		System.out.println("SetName !!!");
