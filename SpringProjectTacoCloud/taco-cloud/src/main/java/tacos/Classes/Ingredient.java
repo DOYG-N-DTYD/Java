@@ -1,6 +1,7 @@
 package tacos.Classes;
 
 import lombok.Data;
+import lombok.extern.java.Log;
 
 @Data
 public class Ingredient {
@@ -18,15 +19,29 @@ public class Ingredient {
 		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Type getType() {
-		// TODO Auto-generated method stub
-		return this.type;
+		return type;
 	}
-	
-	public String id() {
-		return this.id;
+
+	public void setType(Type type) {
+		this.type = type;
 	}
-	public String name() {
-		return this.name;
-	}
+
 }

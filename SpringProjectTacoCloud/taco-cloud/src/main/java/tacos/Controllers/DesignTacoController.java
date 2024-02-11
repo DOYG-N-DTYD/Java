@@ -75,6 +75,8 @@ public class DesignTacoController {
 	public String processTaco(@Valid Taco taco,Errors errors, @ModelAttribute TacoOrder tacoOrder) {	// использовать объект TacoOrder, который был помещен в модель методом order() 
 		if (errors.hasErrors()) {
 			log.info("ERROR ! " + errors); 
+			log.info("ERROR ! " + taco.getName());
+			log.info("ERROR ! " + taco.getIngredients());
 			return "design";
 			 }
 		tacoOrder.addTaco(taco);
@@ -82,3 +84,15 @@ public class DesignTacoController {
 		return "redirect:/orders/current";
 	}
 }
+//@PostMapping
+////@PostMapping -> сообщает @RequestMapping на уровне класса, что processTaco() обрабатывает запросы POST с путём /design
+//public String processTaco(@Valid Taco taco,Errors errors, SessionStatus sessionStatus) {	// использовать объект TacoOrder, который был помещен в модель методом order() 
+//if (errors.hasErrors()) {
+//	log.info("ERROR ! " + errors); 
+//	return "design";
+//	 }
+////tacoOrder.addTaco(taco);
+//log.info("Processing taco: {}", taco);
+//sessionStatus.setComplete();
+//return "redirect:/orders/current";
+//}
