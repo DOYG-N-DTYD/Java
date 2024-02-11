@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import tacos.Classes.TacoOrder;
 
-@Slf4j
+//@Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
@@ -29,8 +29,6 @@ public class OrderController {
 		if (errors.hasErrors()) {
 			return "orderForm";
 		}
-		log.info("Order submitted: {}", order);
-		log.info(order.allDataString());
 		sessionStatus.setComplete();
 		return "redirect:/";
 	}

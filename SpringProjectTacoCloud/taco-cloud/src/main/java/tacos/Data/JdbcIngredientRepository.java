@@ -6,21 +6,23 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import tacos.Classes.Ingredient;
 import tacos.Interfaces.IngredientRepository;
 
+//при создании bean компонента в него будет внедрён JdbcTemplate
 @Repository
-// при создании bean компонента в него будет внедрён JdbcTemplate
+//@ComponentScan(basePackages = "tacos.Classes")
 public class JdbcIngredientRepository implements IngredientRepository {
 
 	private JdbcTemplate jdbcTemplate;
 
-	@Autowired
 	// Если имеется более одного конструктора или если нужно, чтобы автоматическое
 	// связывание определялось явно
+	@Autowired
 	public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}

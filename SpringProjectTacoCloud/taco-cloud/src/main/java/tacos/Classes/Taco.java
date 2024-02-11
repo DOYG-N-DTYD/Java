@@ -1,14 +1,15 @@
 package tacos.Classes;
 
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import javax.swing.ListModel;
+import java.util.Map;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import tacos.Classes.Ingredient.Type;
 
 @Data
 public class Taco {
@@ -45,9 +46,22 @@ public class Taco {
 
 	public void setIngredients(String[] ingredients) {
 		//Из формы получаем массив строковых id, которые нужно переконвертировать
+		Map<String, Ingredient> ingredientMap = new HashMap<>();
+		
+		ingredientMap.put("FLTO", new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
+		ingredientMap.put("COTO", new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
+		ingredientMap.put("GRBF", new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
+		ingredientMap.put("CARN", new Ingredient("CARN", "Carnitas", Type.PROTEIN));
+		ingredientMap.put("TMTO", new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES));
+		ingredientMap.put("LETC", new Ingredient("LETC", "Lettuce", Type.VEGGIES));
+		ingredientMap.put("CHED", new Ingredient("CHED", "Cheddar", Type.CHEESE));
+		ingredientMap.put("JACK", new Ingredient("JACK", "Monterrey Jack", Type.CHEESE));
+		ingredientMap.put("SLSA", new Ingredient("SLSA", "Salsa", Type.SAUCE));
+		ingredientMap.put("SRCR", new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
+		
 		List<Ingredient> convertedIngredients = new ArrayList<>();
 		for (String ingredientIdstring : ingredients) {
-			Ingredient newIngredient = IngredientByIdConverter.staticConvert(ingredientIdstring);
+			Ingredient newIngredient = ingredientMap.get(ingredientIdstring);
 			convertedIngredients.add(newIngredient);
 		}
 		this.ingredients = convertedIngredients;

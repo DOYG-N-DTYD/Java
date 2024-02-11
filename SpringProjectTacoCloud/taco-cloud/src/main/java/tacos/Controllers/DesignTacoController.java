@@ -23,7 +23,7 @@ import tacos.Classes.Taco;
 import tacos.Classes.TacoOrder;
 import tacos.Interfaces.IngredientRepository;
 
-@Slf4j
+//@Slf4j
 //аннотация добавляет в класс
 //private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
@@ -37,8 +37,7 @@ import tacos.Interfaces.IngredientRepository;
 //объект поддерживается на уровне сеанса
 
 public class DesignTacoController {
-	private static final org.slf4j.Logger log =
-			 org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
+	private static final org.slf4j.Logger log =  org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 	
 	private final IngredientRepository ingredientRepo;
 	
