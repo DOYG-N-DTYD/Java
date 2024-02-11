@@ -46,9 +46,8 @@ public class Taco {
 	public void setIngredients(String[] ingredients) {
 		//Из формы получаем массив строковых id, которые нужно переконвертировать
 		List<Ingredient> convertedIngredients = new ArrayList<>();
-		IngredientByIdConverter converter = new IngredientByIdConverter();
 		for (String ingredientIdstring : ingredients) {
-			Ingredient newIngredient = converter.convert(ingredientIdstring);
+			Ingredient newIngredient = IngredientByIdConverter.staticConvert(ingredientIdstring);
 			convertedIngredients.add(newIngredient);
 		}
 		this.ingredients = convertedIngredients;
