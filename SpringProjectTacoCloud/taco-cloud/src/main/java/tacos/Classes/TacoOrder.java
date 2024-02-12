@@ -1,9 +1,12 @@
 package tacos.Classes;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -12,6 +15,8 @@ import lombok.Data;
 
 @Data
 public class TacoOrder {
+	
+	@Column("customer_name")
 	@NotBlank(message = "Delivery name is required")
 	private String deliveryName;
 	@NotBlank(message = "Street is required")
@@ -31,6 +36,10 @@ public class TacoOrder {
 
 	private List<Taco> tacos = new ArrayList<>();
 
+	private Date placedDate;
+	@Id
+	private Long id;
+	
 	public void addTaco(Taco taco) {
 		this.tacos.add(taco);
 	}
@@ -110,5 +119,25 @@ public class TacoOrder {
 	public String allDataString() {
 		return getDeliveryName() + " " + getDeliveryStreet() + " " + getDeliveryCity() + " " + getDeliveryZip() + " "
 				+ getDeliveryState() + " " + getCcNumber() + " " + getCcCVV() + " " + getCcExpiration();
+	}
+
+	public void setPlacedAt(Date date) {
+		// TODO Auto-generated method stub
+		this.placedDate = date;
+	}
+
+	public Object getPlacedAt() {
+		// TODO Auto-generated method stub
+		return this.placedDate;
+	}
+
+	public void setId(long orderId) {
+		// TODO Auto-generated method stub
+		this.id = orderId;
+	}
+	
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 }
