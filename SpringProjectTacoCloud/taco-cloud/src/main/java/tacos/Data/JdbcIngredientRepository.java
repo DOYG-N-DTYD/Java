@@ -36,17 +36,6 @@ public class JdbcIngredientRepository implements IngredientRepository {
 		return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
 	}
 
-	// Если явно нужно использовать RowMapper то реализация следующая
-	/*
-	 * @Override public Ingredient findById(String id) { return
-	 * jdbcTemplate.queryForObject(
-	 * "select id, name, type from Ingredient where id=?", new
-	 * RowMapper<Ingredient>() { public Ingredient mapRow(ResultSet rs, int rowNum)
-	 * throws SQLException { return new Ingredient( rs.getString("id"),
-	 * rs.getString("name"), Ingredient.Type.valueOf(rs.getString("type"))); }; },
-	 * id); }
-	 */
-
 	@Override
 	public Ingredient save(Ingredient ingredient) {
 		jdbcTemplate.update("insert into Ingredient (id, name, type) values (?, ?, ?)", 
@@ -59,6 +48,60 @@ public class JdbcIngredientRepository implements IngredientRepository {
 	private Ingredient mapRowToIngredient(ResultSet row, int rowNum) throws SQLException {
 		return new Ingredient(row.getString("id"), row.getString("name"),
 				Ingredient.Type.valueOf(row.getString("type")));
+	}
+
+	@Override
+	public <S extends Ingredient> Iterable<S> saveAll(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean existsById(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterable<Ingredient> findAllById(Iterable<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void deleteById(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Ingredient entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllById(Iterable<? extends String> ids) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll(Iterable<? extends Ingredient> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -64,6 +64,7 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-relational</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<build>
