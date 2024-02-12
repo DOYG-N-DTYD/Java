@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +20,6 @@ public class JdbcIngredientRepository implements IngredientRepository {
 
 	// Если имеется более одного конструктора или если нужно, чтобы автоматическое
 	// связывание определялось явно
-	@Autowired
 	public JdbcIngredientRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}

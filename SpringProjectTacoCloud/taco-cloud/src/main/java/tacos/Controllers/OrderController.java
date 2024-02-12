@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import tacos.Classes.TacoOrder;
 
 //@Slf4j
@@ -17,7 +16,7 @@ import tacos.Classes.TacoOrder;
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
-	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
+	//private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
 	@GetMapping("/current")
 	public String orderForm() {
