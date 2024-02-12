@@ -33,25 +33,24 @@ import tacos.Interfaces.IngredientRepository;
 //объект поддерживается на уровне сеанса
 
 public class DesignTacoController {
-	private static final org.slf4j.Logger log =  org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
-	
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
+
 	private final IngredientRepository ingredientRepo;
-	
+
 	public DesignTacoController(IngredientRepository ingredientRepo) {
 		this.ingredientRepo = ingredientRepo;
 	}
-	
+
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
-//		List<Ingredient> ingredients = Arrays.asList(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
-//				new Ingredient("COTO", "Corn Tortilla", Type.WRAP), new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
-//				new Ingredient("CARN", "Carnitas", Type.PROTEIN),
-//				new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES), new Ingredient("LETC", "Lettuce", Type.VEGGIES),
-//				new Ingredient("CHED", "Cheddar", Type.CHEESE), new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
-//				new Ingredient("SLSA", "Salsa", Type.SAUCE), new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		Iterable<Ingredient> ingredients = ingredientRepo.findAll();
+		for (Ingredient ingredient : ingredients) {
+			System.out.println("#ingredient# "+ingredient);
+		}
 		Type[] types = Ingredient.Type.values();
 		for (Type type : types) {
+			System.out.println("#type.toString().toLowerCase()# " + type.toString().toLowerCase());
 			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
 		}
 	}
@@ -72,17 +71,28 @@ public class DesignTacoController {
 	}
 
 	private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredients, Type type) {
-		// Iterable has a spliterator() method, which can pass to StreamSupport.stream to create a stream:
-		return StreamSupport.stream(ingredients.spliterator(), false).filter(x -> x.getType().equals(type)).collect(Collectors.toList());
-		//return ingredients.stream().filter(x -> x.getType().equals(type)).collect(Collectors.toList());
+		// Iterable has a spliterator() method, which can pass to StreamSupport.stream
+		// to create a stream:
+		return StreamSupport.stream(ingredients.spliterator(), false).filter(x -> x.getType().equals(type))
+				.collect(Collectors.toList());
+		// return ingredients.stream().filter(x ->
+		// x.getType().equals(type)).collect(Collectors.toList());
 	}
 
 	@PostMapping
-	// @PostMapping -> сообщает @RequestMapping на уровне класса, что processTaco() обрабатывает запросы POST с путём /design
-	public String processTaco(@Valid Taco taco,Errors errors, @ModelAttribute TacoOrder tacoOrder) {	// использовать объект TacoOrder, который был помещен в модель методом order() 
+	// @PostMapping -> сообщает @RequestMapping на уровне класса, что processTaco()
+	// обрабатывает запросы POST с путём /design
+	public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) { // использовать
+																										// объект
+																										// TacoOrder,
+																										// который был
+																										// помещен в
+																										// модель
+																										// методом
+																										// order()
 		if (errors.hasErrors()) {
 			return "design";
-			 }
+		}
 		tacoOrder.addTaco(taco);
 		log.info("Processing taco: {}", taco);
 		return "redirect:/orders/current";

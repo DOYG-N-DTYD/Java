@@ -1,22 +1,29 @@
 package tacos.Classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-@Table
-public class TacoOrder {
+@Entity
+public class TacoOrder implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Column("customer_name")
 	@NotBlank(message = "Delivery name is required")
@@ -36,10 +43,13 @@ public class TacoOrder {
 	@Digits(integer = 3, fraction = 0, message = "Invalid CVV")
 	private String ccCVV;
 
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Taco> tacos = new ArrayList<>();
 
-	private Date placedDate;
+	private Date placedAt = new Date();;
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	public void addTaco(Taco taco) {
@@ -125,12 +135,12 @@ public class TacoOrder {
 
 	public void setPlacedAt(Date date) {
 		// TODO Auto-generated method stub
-		this.placedDate = date;
+		this.placedAt = date;
 	}
 
 	public Object getPlacedAt() {
 		// TODO Auto-generated method stub
-		return this.placedDate;
+		return this.placedAt;
 	}
 
 	public void setId(long orderId) {
