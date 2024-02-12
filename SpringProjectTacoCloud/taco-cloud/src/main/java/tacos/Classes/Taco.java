@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import tacos.Classes.Ingredient.Type;
 
 @Data
+@Table
 public class Taco {
 
 	@NotNull
@@ -22,6 +26,8 @@ public class Taco {
 	private List<Ingredient> ingredients;
 
 	private Date createdAt = new Date();
+	@Id
+	private Long id;
 	
 	public String getName() {
 		return name;
@@ -73,6 +79,16 @@ public class Taco {
 
 	public List<Ingredient> ingredients() {
 		return this.ingredients;
+	}
+
+	public void setCreatedAt(Date date) {
+		// TODO Auto-generated method stub
+		this.createdAt = date;
+	}
+
+	public void setId(long tacoId) {
+		// TODO Auto-generated method stub
+		this.id = tacoId;
 	}
 
 }
