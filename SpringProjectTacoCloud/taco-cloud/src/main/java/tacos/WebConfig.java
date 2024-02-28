@@ -12,8 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addViewController("/").setViewName("home");
 	}
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
-    public String getHomePage(){
-        return "home";
-    }
+//	@RequestMapping(value="/", method = RequestMethod.GET)
+//    public String getHomePage(){
+//        return "home";
+//    }
 }
