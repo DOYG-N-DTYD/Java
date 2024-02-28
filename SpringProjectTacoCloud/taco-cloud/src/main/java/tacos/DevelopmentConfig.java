@@ -1,11 +1,9 @@
 package tacos;
 
 import org.springframework.boot.CommandLineRunner;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import tacos.Classes.Ingredient;
@@ -21,8 +19,11 @@ public class DevelopmentConfig {
 	  public CommandLineRunner dataLoader(IngredientRepository repo,
 	        UserRepository userRepo, PasswordEncoder encoder) { // user repo for ease of testing with a built-in user
 	    return new CommandLineRunner() {
-	      @Override
+	     
+	    	@Override
 	      public void run(String... args) throws Exception {
+	    		repo.deleteAll();
+	            userRepo.deleteAll();
 	        repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
 	        repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
 	        repo.save(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
@@ -35,9 +36,9 @@ public class DevelopmentConfig {
 	        repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 	        
 	        
-	        userRepo.save(new User("habuma", encoder.encode("password"), 
-	            "Craig Walls", "123 North Street", "Cross Roads", "TX", 
-	            "76227", "123-123-1234"));
+	        userRepo.save(new User("sa", encoder.encode("sa"), 
+	                "Craig Walls", "123 North Street", "Cross Roads", "TX", 
+	                "76227", "123-123-1234"
 	      }
 	    };
 	  }
