@@ -51,7 +51,7 @@ public class User implements UserDetails {
 	private final String phoneNumber;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));;
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 	@Override
 	public boolean isAccountNonExpired() {
