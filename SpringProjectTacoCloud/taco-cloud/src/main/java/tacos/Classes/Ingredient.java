@@ -4,14 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
-@Entity
 //@RequiredArgsConstructor
+//@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+//@Entity
+
+@Entity
+@Builder 
+@NoArgsConstructor 
 @AllArgsConstructor
-@NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
+@Setter(value = AccessLevel.PACKAGE)
+@Getter
+
 public class Ingredient {//implements Persistable<String>{
 	@Id
 	private String id;
@@ -27,8 +37,6 @@ public class Ingredient {//implements Persistable<String>{
 	public enum Type {
 		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
 	}
-
-	public Type getType() {
-		return type;
-	}
+	
+	
 }
