@@ -6,14 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
-import jakarta.persistence.Id;
-import org.springframework.data.relational.core.mapping.Column;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -21,11 +23,18 @@ import lombok.Data;
 
 @Data
 @Entity
-public class TacoOrder implements Serializable{
-	
+@Table(name = "Taco_Order")
+public class TacoOrder implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	@Column("customer_name")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@ManyToOne
+	private User user;
+
 	@NotBlank(message = "Delivery name is required")
 	private String deliveryName;
 	@NotBlank(message = "Street is required")
@@ -47,109 +56,13 @@ public class TacoOrder implements Serializable{
 	private List<Taco> tacos = new ArrayList<>();
 
 	private Date placedAt = new Date();;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	public void addTaco(Taco taco) {
-		this.tacos.add(taco);
+
+	public void addTaco(Taco design) {
+		this.tacos.add(design);
 	}
 
-	public String getDeliveryName() {
-		return deliveryName;
-	}
-
-	public void setDeliveryName(String deliveryName) {
-		this.deliveryName = deliveryName;
-	}
-
-	public String getDeliveryStreet() {
-		return deliveryStreet;
-	}
-
-	public void setDeliveryStreet(String deliveryStreet) {
-		this.deliveryStreet = deliveryStreet;
-	}
-
-	public String getDeliveryCity() {
-		return deliveryCity;
-	}
-
-	public void setDeliveryCity(String deliveryCity) {
-		this.deliveryCity = deliveryCity;
-	}
-
-	public String getDeliveryState() {
-		return deliveryState;
-	}
-
-	public void setDeliveryState(String deliveryState) {
-		this.deliveryState = deliveryState;
-	}
-
-	public String getDeliveryZip() {
-		return deliveryZip;
-	}
-
-	public void setDeliveryZip(String deliveryZip) {
-		this.deliveryZip = deliveryZip;
-	}
-
-	public String getCcNumber() {
-		return ccNumber;
-	}
-
-	public void setCcNumber(String ccNumber) {
-		this.ccNumber = ccNumber;
-	}
-
-	public String getCcExpiration() {
-		return ccExpiration;
-	}
-
-	public void setCcExpiration(String ccExpiration) {
-		this.ccExpiration = ccExpiration;
-	}
-
-	public String getCcCVV() {
-		return ccCVV;
-	}
-
-	public void setCcCVV(String ccCVV) {
-		this.ccCVV = ccCVV;
-	}
-
-	public List<Taco> getTacos() {
-		return tacos;
-	}
-
-	public void setTacos(List<Taco> tacos) {
-		this.tacos = tacos;
-	}
-
-	public String allDataString() {
-		return getDeliveryName() + " " + getDeliveryStreet() + " " + getDeliveryCity() + " " + getDeliveryZip() + " "
-				+ getDeliveryState() + " " + getCcNumber() + " " + getCcCVV() + " " + getCcExpiration();
-	}
-
-	public void setPlacedAt(Date date) {
-		// TODO Auto-generated method stub
-		this.placedAt = date;
-	}
-
-	public Object getPlacedAt() {
-		// TODO Auto-generated method stub
-		return this.placedAt;
-	}
-
-	public void setId(long orderId) {
-		// TODO Auto-generated method stub
-		this.id = orderId;
-	}
-	
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return this.id;
+	@PrePersist
+	void placedAt() {
+		this.placedAt = new Date();
 	}
 }
