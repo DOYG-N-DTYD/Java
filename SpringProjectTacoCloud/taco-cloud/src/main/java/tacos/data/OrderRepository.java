@@ -1,12 +1,12 @@
-package tacos.Interfaces;
+package tacos.data;
 
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
-import tacos.Classes.TacoOrder;
-import tacos.Classes.User;
+import tacos.TacoOrder;
+import tacos.User;
 
 public interface OrderRepository extends CrudRepository<TacoOrder, Long> {
 

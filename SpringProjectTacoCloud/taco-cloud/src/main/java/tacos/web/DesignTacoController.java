@@ -1,9 +1,11 @@
-package tacos.Controllers;
+package tacos.web;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import jakarta.validation.Valid;
-import tacos.Classes.Ingredient;
-import tacos.Classes.Ingredient.Type;
-import tacos.Classes.Taco;
-import tacos.Classes.TacoOrder;
-import tacos.Classes.User;
-import tacos.Interfaces.IngredientRepository;
-import tacos.Interfaces.TacoRepository;
-import tacos.Interfaces.UserRepository;
+
+import tacos.Ingredient;
+import tacos.Taco;
+import tacos.TacoOrder;
+import tacos.User;
+import tacos.Ingredient.Type;
+import tacos.data.IngredientRepository;
+import tacos.data.TacoRepository;
+import tacos.data.UserRepository;
 
 @Controller
 @RequestMapping("/design")
@@ -38,7 +40,6 @@ public class DesignTacoController {
 
 	@Autowired
 	public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo, UserRepository userRepo) {
-		System.out.println("1");
 		this.ingredientRepo = ingredientRepo;
 		this.tacoRepo = tacoRepo;
 		this.userRepo = userRepo;
@@ -46,7 +47,6 @@ public class DesignTacoController {
 
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
-		System.out.println("2");
 		List<Ingredient> ingredients = new ArrayList<>();
 		ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
@@ -58,19 +58,16 @@ public class DesignTacoController {
 
 	@ModelAttribute(name = "order")
 	public TacoOrder order() {
-		System.out.println("3");
 		return new TacoOrder();
 	}
 
 	@ModelAttribute(name = "taco")
 	public Taco taco() {
-		System.out.println("4");
 		return new Taco();
 	}
 
 	@ModelAttribute(name = "user")
 	public User user(Principal principal) {
-		System.out.println("5");
 		String username = principal.getName();
 		User user = userRepo.findByUsername(username);
 		return user;
@@ -78,13 +75,11 @@ public class DesignTacoController {
 
 	@GetMapping
 	public String showDesignForm() {
-		System.out.println("6");
 		return "design";
 	}
 
 	@PostMapping
 	public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder order) {
-		System.out.println("7");
 		if (errors.hasErrors()) {
 			return "design";
 		}
