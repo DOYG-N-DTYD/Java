@@ -1,0 +1,31 @@
+spring:
+  security:
+    user:
+      name: sa
+      password: sa
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+
+taco:
+  orders:
+    pageSize: 10
+
+
+  discount:
+    codes:
+      abcdef: 10
+
+
+---
+spring:
+  profiles: prod
+
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: sa
+    password: sa
+
+logging:
+  level:
+    tacos: WARN
