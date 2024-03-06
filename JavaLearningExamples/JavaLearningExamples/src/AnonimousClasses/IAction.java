@@ -1,4 +1,4 @@
-package Shop;
+package AnonimousClasses;
 
 public interface IAction {
 
